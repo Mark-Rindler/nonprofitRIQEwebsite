@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Donate – RIQE (Portal Under Construction)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --green-dark: #283618;
+      --green-mid: #606c38;
+      --cream: #fefae0;
+      --gold: #dda15e;
+      --amber: #bc6c25;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      min-height: 100vh;
+      color: #283618;
+      background-color: var(--cream);
+    }
+
+    /* === simple load-in animations === */
+    @keyframes slideDown {
+      0% {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeUp {
+      0% {
+        transform: translateY(16px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .top-bar,
+      .uc-inner,
+      .highlight-card {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+
+    /* Top fixed bar (copied from donate page) */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 48px;
+      background: rgba(240,236,210, 0.99);
+      border-bottom: 1px solid rgba(40,54,24, 0.2);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+
+      transform: translateY(-20px);
+      opacity: 0;
+      animation: slideDown 0.5s ease-out forwards;
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .top-divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-links {
+      margin-left: 40px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: #283618;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(0, 0, 0, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .top-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .top-donate-btn {
+      background: #283618;
+      color: #fefae0;
+      border: 1px solid #606c38;
+      padding: 6px 14px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .top-donate-btn:hover {
+      background: #3b4d29;
+      border-color: #dda15e;
+      transform: translateY(-1px);
+    }
+
+    .top-socials img {
+      height: 40px;
+      width: 40px;
+      opacity: 0.75;
+      cursor: pointer;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      filter: brightness(0) invert(1);
+    }
+
+    .top-socials img:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    .logo {
+      height: 100px;
+      width: auto;
+      object-fit: contain;
+      margin-right: 16px;
+      filter: brightness(0) saturate(100%)
+              invert(15%) sepia(16%) saturate(700%) hue-rotate(50deg)
+              brightness(90%) contrast(90%);
+    }
+
+    /* Page layout */
+    .uc-page {
+      min-height: 100vh;
+      padding: 80px 10vw 48px; /* top padding to clear fixed bar */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .uc-inner {
+      max-width: 800px;
+      width: 100%;
+      background: rgba(254, 250, 224, 0.96);
+      border-radius: 20px;
+      padding: 32px 28px 28px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(40, 54, 24, 0.15);
+
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.6s ease-out 0.15s forwards;
+      text-align: left;
+    }
+
+    .uc-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8a4f1c;
+      background: rgba(188, 108, 37, 0.08);
+      border-radius: 999px;
+      padding: 4px 12px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .uc-inner h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      color: var(--amber);
+    }
+
+    .uc-tagline {
+      font-size: 0.98rem;
+      color: #7b4a1b;
+      margin-bottom: 20px;
+    }
+
+    .uc-inner p {
+      font-size: 0.97rem;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      color: #3a3a2a;
+    }
+
+    .highlight-card {
+      margin-top: 18px;
+      background: #fefae0;
+      border-radius: 18px;
+      padding: 18px 20px 20px;
+      border: 1px solid rgba(40, 54, 24, 0.12);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.45s ease-out 0.25s forwards;
+    }
+
+    .highlight-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+
+    .zelle-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #7b4a1b;
+      margin-bottom: 4px;
+    }
+
+    .zelle-number {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #283618;
+      margin-bottom: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .zelle-note {
+      font-size: 0.9rem;
+      color: #5e5a3f;
+      margin-bottom: 4px;
+    }
+
+    .zelle-small {
+      font-size: 0.8rem;
+      color: #6b6743;
+      margin-top: 6px;
+    }
+
+    .btn-row {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 2px solid transparent;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
+        background-color 0.12s ease-out, color 0.12s ease-out,
+        border-color 0.12s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--amber);
+      color: var(--cream);
+      box-shadow: 0 10px 20px rgba(188, 108, 37, 0.4);
+    }
+
+    .btn-primary:hover {
+      background: #a15416;
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(188, 108, 37, 0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--amber);
+      border-color: var(--amber);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(188, 108, 37, 0.08);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    .back-link {
+      margin-top: 22px;
+      font-size: 0.9rem;
+    }
+
+    .back-link a {
+      color: var(--amber);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    .site-footer {
+      background: var(--green-dark);
+      color: var(--cream);
+      padding: 24px 10vw 28px;
+      font-size: 0.85rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .footer-left p {
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .footer-small {
+      font-size: 0.78rem;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: right;
+      align-items: flex-end;
+    }
+
+    .footer-right a {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-right a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 700px) {
+      .uc-inner {
+        padding: 24px 18px 20px;
+      }
+
+      .uc-inner h1 {
+        font-size: 1.7rem;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: left;
+      }
+
+      .footer-right {
+        align-items: flex-start;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="top-left">
+      <a href="index.html" style="display:flex; align-items:center; gap:16px; text-decoration:none;">
+        <img src="riqe-logo.png" class="logo" alt="RIQE Logo">
+      </a>
+      <div class="top-divider"></div>
+
+      <nav class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#programaward">Program Awards</a>
+        <a href="index.html#curriculum">Curriculum Information</a>
+        <a href="apply.html">Apply</a>
+        <a href="mailto:mark.b.rindler2@gmail.com">Contact</a>
+      </nav>
+    </div>
+
+    <div class="top-right">
+      <a href="#donate" class="top-donate-btn">Donate</a>
+      <div class="top-socials">
+        <a href="https://github.com/" target="_blank">
+          <img src="githublogo.png" alt="GitHub">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <main class="uc-page">
+    <section id="donate" class="uc-inner">
+      <span class="uc-badge">Online portal</span>
+      <h1>Online Donations Under Construction</h1>
+      <p class="uc-tagline">
+        Until RIQE is formally set up as a nonprofit organization, we won’t have a
+        polished online donation portal. In the meantime, we’re handling contributions
+        through Zelle.
+      </p>
+
+      <p>
+        If you’d like to support RIQE while we work toward full nonprofit status,
+        please send any contributions via Zelle using the number below. Contributions
+        currently go to a personal account, and my intent is to use these funds to
+        cover early RIQE expenses like data access, compute resources, curriculum
+        development, and outreach.
+      </p>
+
+      <div class="highlight-card">
+        <div class="highlight-title">Temporary Giving Instructions</div>
+        <div class="zelle-label">Please Zelle any contributions to:</div>
+        <div class="zelle-number">+1 (817) 996-4648</div>
+        <div class="zelle-note">
+          You can add this number in your banking app’s Zelle section and send
+          your contribution directly.
+        </div>
+        <div class="zelle-small">
+          Note: RIQE is not currently a nonprofit organization or a tax-exempt entity.
+          Contributions are not tax-deductible at this time and are processed as
+          personal payments, but are used solely to support RIQE-related educational
+          activities and startup costs.
+        </div>
+
+        <div class="btn-row">
+          <a href="tel:+18179964648" class="btn btn-primary">Tap to Call This Number</a>
+          <a href="mailto:mark.b.rindler2@gmail.com?subject=Donation%20Question" class="btn btn-secondary">
+            Email with Questions
+          </a>
+        </div>
+      </div>
+
+      <p class="zelle-small" style="margin-top:18px;">
+        As soon as RIQE is able to operate as a nonprofit and set up a proper online
+        portal, this page will be updated with a cleaner, fully hosted donation option.
+      </p>
+
+      <div class="back-link">
+        <a href="donate.html">&larr; Back to Donate Page</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <strong>Rindler Institute of Quantitative Education (RIQE)</strong>
+        <p>
+          RIQE is a prospective nonprofit educational initiative and is not yet recognized
+          as a tax-exempt organization. Contributions made via this page are not currently
+          tax-deductible.
+        </p>
+        <p class="footer-small">
+          This site and program are for educational purposes only and do not
+          constitute financial advice or a solicitation to trade securities.
+        </p>
+      </div>
+      <div class="footer-right">
+        <a href="mailto:mark.b.rindler2@gmail.com">mark.b.rindler2@gmail.com</a>
+        <a href="privpolicy.html" class="footer-small">Privacy Policy</a>
+        <span class="footer-small">© 2025 RIQE. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
