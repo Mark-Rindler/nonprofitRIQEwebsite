@@ -5,6 +5,12 @@
   <title>Apply – RIQE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
   <style>
     :root {
       --green-dark: #283618;
@@ -93,27 +99,41 @@
       animation: softFadeIn 0.45s ease-out 0.35s both;
     }
 
-    /* EXISTING STYLES */
+    /* ---------- NAV / TOP BAR ---------- */
 
-    /* TOP BAR */
-    .top-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 48px;
-      background: rgba(240,236,210, 0.99);
-      border-bottom: 1px solid rgba(40,54,24, 0.2);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      padding: 0 24px;
-    }
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(240, 236, 210, 0.99);
+  border-bottom: 1px solid rgba(40, 54, 24, 0.2);
+  z-index: 100;
+
+  /* restore alignment like before */
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  height: 48px;
+}
+
+.top-bar-main {
+  /* make this just an inner flex row, not a centered container */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  /* override the centering constraints from before */
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
 
     .top-left {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 16px;
     }
 
     .logo {
@@ -131,9 +151,10 @@
     }
 
     .nav-links {
-      margin-left: 40px;
+      margin-left: 32px;
       display: flex;
       gap: 20px;
+      flex: 1;
     }
 
     .nav-links a {
@@ -143,11 +164,13 @@
       font-weight: 600;
       padding: 6px 10px;
       border-radius: 6px;
-      transition: background 0.2s ease;
+      transition: background 0.15s ease, transform 0.15s ease;
+      white-space: nowrap;
     }
 
     .nav-links a:hover {
       background: rgba(0, 0, 0, 0.10);
+      transform: translateY(-1px);
     }
 
     .top-right {
@@ -166,6 +189,15 @@
       text-decoration: none;
       font-weight: 600;
       cursor: pointer;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .top-donate-btn:hover {
+      background: #3b4d29;
+      border-color: #dda15e;
+      transform: translateY(-1px);
     }
 
     .top-socials img {
@@ -173,11 +205,63 @@
       width: 40px;
       opacity: 0.75;
       filter: brightness(0) invert(1);
-      transition: opacity 0.2s;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+      cursor: pointer;
     }
 
     .top-socials img:hover {
       opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    /* Hamburger/menu button */
+
+    .menu-toggle {
+      display: none;
+      margin-left: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(40, 54, 24, 0.35);
+      background: rgba(254, 250, 224, 0.96);
+      cursor: pointer;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #283618;
+    }
+
+    .menu-toggle:focus-visible {
+      outline: 2px solid #283618;
+      outline-offset: 2px;
+    }
+
+    .menu-lines {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .menu-lines .line {
+      width: 18px;
+      height: 2px;
+      background: #283618;
+      margin: 2px 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .menu-label {
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* X animation when menu is open */
+    .top-bar.menu-open .menu-lines .line:nth-child(1) {
+      transform: translateY(2px) rotate(45deg);
+    }
+
+    .top-bar.menu-open .menu-lines .line:nth-child(2) {
+      transform: translateY(-2px) rotate(-45deg);
     }
 
     /* MAIN CONTENT */
@@ -273,11 +357,12 @@
       border: 1px dashed rgba(40,54,24,0.35);
       background: #f9f3e3;
       margin-top: 2px;
+      position: relative;
     }
 
     .file-upload input[type="file"] {
       position: absolute;
-      left: -9999px; 
+      left: -9999px;
     }
 
     .file-upload-button {
@@ -393,6 +478,7 @@
       display: flex;
       justify-content: space-between;
       gap: 24px;
+      align-items: flex-start;
     }
 
     .footer-left p {
@@ -427,7 +513,7 @@
       position: fixed;
       inset: 0;
       background: rgba(40, 54, 24, 0.65);
-      display: none; 
+      display: none;
       align-items: center;
       justify-content: center;
       z-index: 9999;
@@ -480,35 +566,148 @@
       }
     }
 
-    @media (max-width: 800px) {
+    /* ---------- RESPONSIVE ---------- */
+
+    @media (max-width: 900px) {
+      .top-bar-main {
+        height: auto;
+        padding: 6px 16px 8px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .logo {
+        height: 60px;
+        margin-right: 0;
+      }
+
+      .top-divider {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        margin-left: auto;
+      }
+
+      /* Hide desktop nav & right side by default on mobile */
+      .nav-links,
+      .top-right {
+        display: none;
+        width: 100%;
+        background: rgba(240, 236, 210, 0.98);
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 8px;
+        margin-left: 0;
+        margin-top: 6px;
+        padding-top: 8px;
+        padding-bottom: 4px;
+        border-top: 1px solid rgba(40, 54, 24, 0.2);
+      }
+
+      .nav-links a {
+        padding: 6px 0;
+        font-size: 0.9rem;
+      }
+
+      .top-right {
+        justify-content: flex-start;
+        margin-left: 0;
+        margin-top: 4px;
+        padding-bottom: 4px;
+        gap: 12px;
+      }
+
+      /* When menu is open, show dropdown */
+      .top-bar.menu-open .nav-links,
+      .top-bar.menu-open .top-right {
+        display: flex;
+      }
+
+      /* Form/layout tweaks */
+      .apply-wrapper {
+        margin-top: 100px;
+        padding: 32px 16px 50px;
+      }
+
+      .apply-container {
+        padding: 24px 20px 30px;
+        border-radius: 18px;
+      }
+
       form {
         grid-template-columns: 1fr;
+        gap: 14px;
       }
-      .file-upload-text {
-        max-width: 180px;
-      }
-    }
 
-    @media (max-width: 700px) {
+      .submit-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .note {
+        margin-top: 4px;
+      }
+
+      .site-footer {
+        padding: 20px 8vw 22px;
+      }
+
       .footer-inner {
         flex-direction: column;
         text-align: left;
+        align-items: flex-start;
       }
+
       .footer-right {
         text-align: left;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        height: 50px;
+      }
+
+      .apply-container h1 {
+        font-size: 1.7rem;
+      }
+
+      .apply-subtitle {
+        font-size: 0.9rem;
+      }
+
+      .apply-wrapper {
+        margin-top: 110px;
+        padding: 28px 14px 46px;
+      }
+
+      .file-upload-text {
+        max-width: 180px;
+      }
+
+      .site-footer {
+        padding: 18px 6vw 20px;
+        font-size: 0.8rem;
       }
     }
   </style>
 </head>
 
-
 <body>
 
   <!-- TOP BAR -->
   <div class="top-bar">
-    <div class="top-left">
-      <img src="riqe-logo.png" class="logo" alt="RIQE Logo">
-      <div class="top-divider"></div>
+    <div class="top-bar-main">
+      <div class="top-left">
+        <img src="riqe-logo.png" class="logo" alt="RIQE Logo">
+        <div class="top-divider"></div>
+      </div>
 
       <nav class="nav-links">
         <a href="index.html#about">About</a>
@@ -517,15 +716,24 @@
         <a href="apply.html">Apply</a>
         <a href="mailto:mark.b.rindler2@gmail.com">Contact</a>
       </nav>
-    </div>
 
-    <div class="top-right">
-      <a href="donate.html" class="top-donate-btn">Donate</a>
-      <div class="top-socials">
-        <a href="https://github.com/" target="_blank">
-          <img src="githublogo.png" alt="GitHub">
-        </a>
+      <div class="top-right">
+        <a href="donate.html" class="top-donate-btn">Donate</a>
+        <div class="top-socials">
+          <a href="https://github.com/" target="_blank">
+            <img src="githublogo.png" alt="GitHub">
+          </a>
+        </div>
       </div>
+
+      <!-- Menu button -->
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <div class="menu-lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="menu-label">Menu</span>
+      </button>
     </div>
   </div>
 
@@ -597,7 +805,7 @@
               No file selected
             </span>
           </div>
-          <div class="helper-text">PDF preferred, max size ~5–10 MB depending on hosting.</div>
+          <div class="helper-text">PDF preferred, max size ~5–10 MB.</div>
         </div>
 
         <div class="full-width submit-row">
@@ -652,6 +860,29 @@
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyNyiuGTDWGfIzQ-u1YdG01dxayctC1V2xNAw2O6Xzl1yULvheT7yeszT7sIPcllik/exec";
 
   document.addEventListener('DOMContentLoaded', function () {
+    // ----- Mobile nav toggle -----
+    const topBar = document.querySelector('.top-bar');
+    const toggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    if (topBar && toggle) {
+      toggle.addEventListener('click', function () {
+        const isOpen = topBar.classList.toggle('menu-open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      // Close the menu when a nav link is clicked (on mobile)
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (topBar.classList.contains('menu-open')) {
+            topBar.classList.remove('menu-open');
+            toggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    }
+
+    // ----- Form + file upload + loading overlay -----
     const form = document.getElementById('riqe-apply-form');
     if (!form) {
       console.error('Form with id="riqe-apply-form" not found.');

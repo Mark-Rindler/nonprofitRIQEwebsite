@@ -5,6 +5,12 @@
   <title>Donate – RIQE (Portal Under Construction)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
   <style>
     :root {
       --green-dark: #283618;
@@ -65,7 +71,7 @@
       }
     }
 
-    /* Top fixed bar (copied from donate page) */
+    /* Top fixed bar */
     .top-bar {
       position: fixed;
       top: 0;
@@ -110,6 +116,7 @@
       padding: 6px 10px;
       border-radius: 6px;
       transition: background 0.15s ease, transform 0.15s ease;
+      white-space: nowrap;
     }
 
     .nav-links a:hover {
@@ -134,6 +141,7 @@
       font-weight: 600;
       font-size: 0.9rem;
       transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+      white-space: nowrap;
     }
 
     .top-donate-btn:hover {
@@ -164,6 +172,56 @@
       filter: brightness(0) saturate(100%)
               invert(15%) sepia(16%) saturate(700%) hue-rotate(50deg)
               brightness(90%) contrast(90%);
+    }
+
+    /* Hamburger/menu button */
+
+    .menu-toggle {
+      display: none;
+      margin-left: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(40, 54, 24, 0.35);
+      background: rgba(254, 250, 224, 0.96);
+      cursor: pointer;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #283618;
+    }
+
+    .menu-toggle:focus-visible {
+      outline: 2px solid #283618;
+      outline-offset: 2px;
+    }
+
+    .menu-lines {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .menu-lines .line {
+      width: 18px;
+      height: 2px;
+      background: #283618;
+      margin: 2px 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .menu-label {
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* X animation when menu is open */
+    .top-bar.menu-open .menu-lines .line:nth-child(1) {
+      transform: translateY(2px) rotate(45deg);
+    }
+
+    .top-bar.menu-open .menu-lines .line:nth-child(2) {
+      transform: translateY(-2px) rotate(-45deg);
     }
 
     /* Page layout */
@@ -380,6 +438,93 @@
       text-decoration: underline;
     }
 
+    /* ---------- RESPONSIVE ---------- */
+
+    @media (max-width: 900px) {
+      .top-bar {
+        padding: 6px 16px 8px;
+        height: auto;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .logo {
+        height: 60px;
+        margin-right: 0;
+      }
+
+      .top-divider {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        margin-left: auto;
+      }
+
+      /* Hide desktop nav & right side by default on mobile */
+      .nav-links,
+      .top-right {
+        display: none;
+        width: 100%;
+        background: rgba(240, 236, 210, 0.98);
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 8px;
+        margin-left: 0;
+        margin-top: 6px;
+        padding-top: 8px;
+        padding-bottom: 4px;
+        border-top: 1px solid rgba(40, 54, 24, 0.2);
+      }
+
+      .nav-links a {
+        padding: 6px 0;
+        font-size: 0.9rem;
+      }
+
+      .top-right {
+        justify-content: flex-start;
+        margin-left: 0;
+        margin-top: 4px;
+        padding-bottom: 4px;
+        gap: 12px;
+      }
+
+      /* When menu is open, show dropdown */
+      .top-bar.menu-open .nav-links,
+      .top-bar.menu-open .top-right {
+        display: flex;
+      }
+
+      .uc-page {
+        padding: 96px 6vw 40px;
+      }
+
+      .uc-inner {
+        padding: 26px 20px 22px;
+        border-radius: 18px;
+      }
+
+      .site-footer {
+        padding: 20px 8vw 22px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: left;
+        align-items: flex-start;
+      }
+
+      .footer-right {
+        align-items: flex-start;
+        text-align: left;
+      }
+    }
+
     @media (max-width: 700px) {
       .uc-inner {
         padding: 24px 18px 20px;
@@ -387,16 +532,6 @@
 
       .uc-inner h1 {
         font-size: 1.7rem;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        text-align: left;
-      }
-
-      .footer-right {
-        align-items: flex-start;
-        text-align: left;
       }
     }
   </style>
@@ -428,6 +563,15 @@
         </a>
       </div>
     </div>
+
+    <!-- Mobile menu button -->
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <div class="menu-lines">
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+      <span class="menu-label">Menu</span>
+    </button>
   </div>
 
   <!-- Main content -->
@@ -505,5 +649,29 @@
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const topBar = document.querySelector('.top-bar');
+      const toggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      if (topBar && toggle) {
+        toggle.addEventListener('click', function () {
+          const isOpen = topBar.classList.toggle('menu-open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        // Close menu when a nav link is clicked (on mobile)
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            if (topBar.classList.contains('menu-open')) {
+              topBar.classList.remove('menu-open');
+              toggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>

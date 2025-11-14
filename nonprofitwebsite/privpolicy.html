@@ -5,6 +5,12 @@
   <title>Privacy Policy – RIQE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+
   <style>
     :root {
       --green-dark: #283618;
@@ -31,6 +37,8 @@
       color: #283618;
     }
 
+    /* ---------- TOP BAR ---------- */
+
     .top-bar {
       position: fixed;
       top: 0;
@@ -43,6 +51,13 @@
       display: flex;
       align-items: center;
       padding: 0 24px;
+    }
+
+    .top-bar-main {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 24px;
     }
 
     .top-left {
@@ -78,11 +93,13 @@
       font-weight: 600;
       padding: 6px 10px;
       border-radius: 6px;
-      transition: background 0.2s ease;
+      transition: background 0.2s ease, transform 0.15s ease;
+      white-space: nowrap;
     }
 
     .nav-links a:hover {
       background: rgba(0, 0, 0, 0.10);
+      transform: translateY(-1px);
     }
 
     .top-right {
@@ -100,6 +117,16 @@
       border-radius: 14px;
       text-decoration: none;
       font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .top-donate-btn:hover {
+      background: #3b4d29;
+      border-color: #dda15e;
+      transform: translateY(-1px);
     }
 
     .top-socials img {
@@ -107,15 +134,69 @@
       width: 40px;
       opacity: 0.75;
       filter: brightness(0) invert(1);
-      transition: opacity 0.2s;
+      transition: opacity 0.2s, transform 0.15s ease;
+      cursor: pointer;
     }
 
     .top-socials img:hover {
       opacity: 1;
+      transform: translateY(-1px);
     }
 
+    /* Hamburger/menu button */
+
+    .menu-toggle {
+      display: none;
+      margin-left: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(40, 54, 24, 0.35);
+      background: rgba(254, 250, 224, 0.96);
+      cursor: pointer;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #283618;
+    }
+
+    .menu-toggle:focus-visible {
+      outline: 2px solid #283618;
+      outline-offset: 2px;
+    }
+
+    .menu-lines {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .menu-lines .line {
+      width: 18px;
+      height: 2px;
+      background: #283618;
+      margin: 2px 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .menu-label {
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* X animation when menu is open */
+    .top-bar.menu-open .menu-lines .line:nth-child(1) {
+      transform: translateY(2px) rotate(45deg);
+    }
+
+    .top-bar.menu-open .menu-lines .line:nth-child(2) {
+      transform: translateY(-2px) rotate(-45deg);
+    }
+
+    /* ---------- PRIVACY POLICY CONTENT ---------- */
+
     .policy-wrapper {
-      margin-top: 90px; /* so content sits below top bar */
+      margin-top: 90px; /* below top bar */
       display: flex;
       justify-content: center;
       padding: 40px 20px 60px;
@@ -123,6 +204,7 @@
 
     .policy-container {
       max-width: 900px;
+      width: 100%;
       background: rgba(254,250,224,0.92);
       padding: 32px 28px;
       border-radius: 20px;
@@ -174,6 +256,8 @@
       text-decoration: underline;
     }
 
+    /* ---------- FOOTER ---------- */
+
     .site-footer {
       background: var(--green-dark);
       color: var(--cream);
@@ -217,13 +301,113 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 700px) {
+    /* ---------- RESPONSIVE ---------- */
+
+    @media (max-width: 900px) {
+      .top-bar {
+        height: auto;
+        padding: 6px 16px 8px;
+      }
+
+      .top-bar-main {
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .logo {
+        height: 60px;
+      }
+
+      .top-divider {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        margin-left: auto;
+      }
+
+      /* Hide desktop nav & right side by default on mobile */
+      .nav-links,
+      .top-right {
+        display: none;
+        width: 100%;
+        background: rgba(240, 236, 210, 0.98);
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 8px;
+        margin-left: 0;
+        margin-top: 6px;
+        padding-top: 8px;
+        padding-bottom: 4px;
+        border-top: 1px solid rgba(40, 54, 24, 0.2);
+      }
+
+      .nav-links a {
+        padding: 6px 0;
+        font-size: 0.9rem;
+      }
+
+      .top-right {
+        justify-content: flex-start;
+        margin-left: 0;
+        margin-top: 4px;
+        padding-bottom: 4px;
+        gap: 12px;
+      }
+
+      /* When menu is open, show dropdown */
+      .top-bar.menu-open .nav-links,
+      .top-bar.menu-open .top-right {
+        display: flex;
+      }
+
+      .policy-wrapper {
+        margin-top: 100px;
+        padding: 32px 16px 52px;
+      }
+
+      .policy-container {
+        padding: 24px 20px;
+        border-radius: 18px;
+      }
+
+      .site-footer {
+        padding: 20px 8vw 22px;
+      }
+
       .footer-inner {
         flex-direction: column;
         text-align: left;
+        align-items: flex-start;
       }
+
       .footer-right {
         text-align: left;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        height: 50px;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      .policy-wrapper {
+        margin-top: 110px;
+        padding: 26px 14px 46px;
+      }
+
+      .site-footer {
+        padding: 18px 6vw 20px;
+        font-size: 0.8rem;
       }
     }
   </style>
@@ -233,9 +417,11 @@
 
   <!-- TOP BAR -->
   <div class="top-bar">
-    <div class="top-left">
-      <img src="riqe-logo.png" class="logo" alt="RIQE Logo">
-      <div class="top-divider"></div>
+    <div class="top-bar-main">
+      <div class="top-left">
+        <img src="riqe-logo.png" class="logo" alt="RIQE Logo">
+        <div class="top-divider"></div>
+      </div>
 
       <nav class="nav-links">
         <a href="index.html#about">About</a>
@@ -244,15 +430,24 @@
         <a href="index.html#apply">Apply</a>
         <a href="mailto:mark.b.rindler2@gmail.com">Contact</a>
       </nav>
-    </div>
 
-    <div class="top-right">
-      <a href="index.html#donate" class="top-donate-btn">Donate</a>
-      <div class="top-socials">
-        <a href="https://github.com/" target="_blank">
-          <img src="githublogo.png" alt="GitHub">
-        </a>
+      <div class="top-right">
+        <a href="index.html#donate" class="top-donate-btn">Donate</a>
+        <div class="top-socials">
+          <a href="https://github.com/" target="_blank">
+            <img src="githublogo.png" alt="GitHub">
+          </a>
+        </div>
       </div>
+
+      <!-- Menu button -->
+      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <div class="menu-lines">
+          <span class="line"></span>
+          <span class="line"></span>
+        </div>
+        <span class="menu-label">Menu</span>
+      </button>
     </div>
   </div>
 
@@ -335,5 +530,29 @@
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const topBar = document.querySelector('.top-bar');
+      const toggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelectorAll('.nav-links a');
+
+      if (topBar && toggle) {
+        toggle.addEventListener('click', function () {
+          const isOpen = topBar.classList.toggle('menu-open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        // Close the menu when a nav link is clicked (on mobile)
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            if (topBar.classList.contains('menu-open')) {
+              topBar.classList.remove('menu-open');
+              toggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>
