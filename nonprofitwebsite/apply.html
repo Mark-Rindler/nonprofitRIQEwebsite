@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Apply – RIQE</title>
+  <title>RIQE – Apply</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
@@ -70,6 +70,29 @@
       }
     }
 
+    /* Dropdown animations for mobile nav */
+    @keyframes dropdownIn {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes dropdownOut {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+    }
+
     /* Respect users who prefer reduced motion */
     @media (prefers-reduced-motion: reduce) {
       * {
@@ -101,34 +124,31 @@
 
     /* ---------- NAV / TOP BAR ---------- */
 
-.top-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(240, 236, 210, 0.99);
-  border-bottom: 1px solid rgba(40, 54, 24, 0.2);
-  z-index: 100;
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(240, 236, 210, 0.99);
+      border-bottom: 1px solid rgba(40, 54, 24, 0.2);
+      z-index: 100;
 
-  /* restore alignment like before */
-  display: flex;
-  align-items: center;
-  padding: 0 24px;
-  height: 48px;
-}
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      height: 48px;
+    }
 
-.top-bar-main {
-  /* make this just an inner flex row, not a centered container */
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 24px;
+    .top-bar-main {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 24px;
 
-  /* override the centering constraints from before */
-  max-width: none;
-  margin: 0;
-  padding: 0;
-}
+      max-width: none;
+      margin: 0;
+      padding: 0;
+    }
 
     .top-left {
       display: flex;
@@ -569,9 +589,15 @@
     /* ---------- RESPONSIVE ---------- */
 
     @media (max-width: 900px) {
-      .top-bar-main {
+      /* Top bar & logo layout on mobile */
+      .top-bar {
         height: auto;
         padding: 6px 16px 8px;
+      }
+
+      .top-bar-main {
+        height: auto;
+        padding: 0;
         flex-wrap: wrap;
         align-items: flex-start;
         gap: 8px;
@@ -586,6 +612,7 @@
         display: none;
       }
 
+      /* Show hamburger button on mobile */
       .menu-toggle {
         display: inline-flex;
         margin-left: auto;
@@ -622,13 +649,21 @@
         gap: 12px;
       }
 
-      /* When menu is open, show dropdown */
+      /* When menu is open, show dropdown with open animation */
       .top-bar.menu-open .nav-links,
       .top-bar.menu-open .top-right {
         display: flex;
+        animation: dropdownIn 0.22s ease-out;
       }
 
-      /* Form/layout tweaks */
+      /* Optional: closing animation */
+      .top-bar.menu-closing .nav-links,
+      .top-bar.menu-closing .top-right {
+        display: flex;
+        animation: dropdownOut 0.2s ease-in forwards;
+      }
+
+      /* Form/layout tweaks (same as before) */
       .apply-wrapper {
         margin-top: 100px;
         padding: 32px 16px 50px;
@@ -860,29 +895,75 @@
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyNyiuGTDWGfIzQ-u1YdG01dxayctC1V2xNAw2O6Xzl1yULvheT7yeszT7sIPcllik/exec";
 
   document.addEventListener('DOMContentLoaded', function () {
-    // ----- Mobile nav toggle -----
+    /* ---------- ANIMATED MOBILE NAV ---------- */
     const topBar = document.querySelector('.top-bar');
     const toggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const menuLinks = document.querySelectorAll('.nav-links a, .top-right a');
 
     if (topBar && toggle) {
-      toggle.addEventListener('click', function () {
-        const isOpen = topBar.classList.toggle('menu-open');
-        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      const MOBILE_BREAKPOINT = 900;
+      const ANIM_MS = 220;
+      let isAnimating = false;
+
+      const isMobile = () => window.innerWidth <= MOBILE_BREAKPOINT;
+
+      function openMenu() {
+        if (isAnimating || !isMobile()) return;
+        isAnimating = true;
+
+        topBar.classList.remove('menu-closing');
+        topBar.classList.add('menu-open');
+        toggle.setAttribute('aria-expanded', 'true');
+
+        setTimeout(() => {
+          isAnimating = false;
+        }, ANIM_MS);
+      }
+
+      function closeMenu() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        topBar.classList.remove('menu-open');
+        topBar.classList.add('menu-closing');
+        toggle.setAttribute('aria-expanded', 'false');
+
+        setTimeout(() => {
+          topBar.classList.remove('menu-closing');
+          isAnimating = false;
+        }, ANIM_MS);
+      }
+
+      toggle.addEventListener('click', () => {
+        if (!isMobile()) return;
+
+        if (topBar.classList.contains('menu-open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
       });
 
-      // Close the menu when a nav link is clicked (on mobile)
-      navLinks.forEach(link => {
+      // Close menu when any nav or top-right link is clicked on mobile
+      menuLinks.forEach(link => {
         link.addEventListener('click', () => {
-          if (topBar.classList.contains('menu-open')) {
-            topBar.classList.remove('menu-open');
-            toggle.setAttribute('aria-expanded', 'false');
+          if (isMobile() && topBar.classList.contains('menu-open')) {
+            closeMenu();
           }
         });
       });
+
+      // Reset classes when resizing back to desktop
+      window.addEventListener('resize', () => {
+        if (!isMobile()) {
+          topBar.classList.remove('menu-open', 'menu-closing');
+          toggle.setAttribute('aria-expanded', 'false');
+          isAnimating = false;
+        }
+      });
     }
 
-    // ----- Form + file upload + loading overlay -----
+    /* ---------- FORM + FILE UPLOAD + LOADING OVERLAY ---------- */
     const form = document.getElementById('riqe-apply-form');
     if (!form) {
       console.error('Form with id="riqe-apply-form" not found.');
@@ -942,7 +1023,6 @@
     window.addEventListener('beforeunload', function (e) {
       if (!isSubmitting) return;
       e.preventDefault();
-      // Most browsers ignore custom text now but require returnValue to show a prompt
       e.returnValue = 'Your application is still being submitted. If you leave this page, your progress will not be saved.';
       return e.returnValue;
     });
