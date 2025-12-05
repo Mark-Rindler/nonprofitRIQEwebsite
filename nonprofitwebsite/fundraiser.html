@@ -14,24 +14,20 @@
   <meta charset="UTF-8" />
   <title>RIQE Dallas Mixer – Networking & Fundraiser</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Join the Rindler Institute for an exclusive networking mixer in Dallas. Connect with industry professionals and support the next generation of quant talent." />
+  <meta name="description" content="Join the Rindler Institute for an exclusive networking mixer in Dallas." />
 
-  <!-- Fonts: Libre Baskerville & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      /* Palette (Consistent with Main Site) */
       --green-dark: #283618;
       --green-mid: #606c38;
       --cream: #fefae0;
       --cream-dim: #f2ebd4;
       --gold: #dda15e;
       --amber: #bc6c25;
-      
-      --header-height: 70px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,44 +39,21 @@
       line-height: 1.6;
     }
 
-    h1, h2, h3 {
-      font-family: 'Libre Baskerville', serif;
-      color: var(--green-dark);
-    }
-
+    h1, h2, h3 { font-family: 'Libre Baskerville', serif; color: var(--green-dark); }
     a { text-decoration: none; color: inherit; transition: all 0.2s; }
 
-    /* --- NAVIGATION (Simplified for Event Page) --- */
+    /* --- NAV --- */
     .top-bar {
-      position: fixed;
-      top: 0; left: 0; width: 100%;
-      height: var(--header-height);
-      background: rgba(254, 250, 224, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(40, 54, 24, 0.1);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 5%;
+      position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+      background: rgba(254, 250, 224, 0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(40, 54, 24, 0.1); z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between; padding: 0 5%;
     }
-
-    .logo-text {
-      font-weight: 800; 
-      font-size: 1.5rem; 
-      color: var(--green-dark); 
-      font-family: 'Libre Baskerville';
-    }
-
-    .nav-link {
-      font-weight: 600;
-      color: var(--green-dark);
-      font-size: 0.9rem;
-    }
-
+    .logo-text { font-weight: 800; font-size: 1.5rem; color: var(--green-dark); font-family: 'Libre Baskerville'; }
+    .nav-link { font-weight: 600; color: var(--green-dark); font-size: 0.9rem; }
     .nav-link:hover { color: var(--amber); }
 
-    /* --- EVENT HERO SECTION --- */
+    /* --- HERO --- */
     .event-hero {
       background-color: var(--green-dark);
       min-height: 85vh;
@@ -94,147 +67,119 @@
       overflow: hidden;
     }
 
-    /* Abstract Background Pattern */
     .event-hero::before {
-      content: "";
-      position: absolute; inset: 0;
+      content: ""; position: absolute; inset: 0;
       background-image: 
         radial-gradient(circle at 20% 30%, rgba(255,255,255,0.03) 0%, transparent 50%),
         radial-gradient(circle at 80% 70%, rgba(221, 161, 94, 0.1) 0%, transparent 50%);
     }
 
     .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
+      position: relative; z-index: 2; max-width: 800px;
       animation: fadeUp 1s ease-out;
     }
 
     .event-eyebrow {
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      display: block;
+      color: var(--gold); text-transform: uppercase; letter-spacing: 3px;
+      font-size: 0.85rem; font-weight: 700; margin-bottom: 16px; display: block;
     }
-
-    .event-title {
-      font-size: 3.5rem;
-      color: var(--cream);
-      line-height: 1.1;
-      margin-bottom: 24px;
-    }
+    .event-title { font-size: 3.5rem; color: var(--cream); line-height: 1.1; margin-bottom: 24px; }
 
     .event-details-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 20px;
-      background: rgba(254, 250, 224, 0.1);
-      border: 1px solid rgba(254, 250, 224, 0.2);
-      padding: 12px 24px;
-      border-radius: 50px;
-      color: var(--cream);
-      font-size: 1.1rem;
-      backdrop-filter: blur(5px);
-      margin-bottom: 32px;
+      display: inline-flex; align-items: center; gap: 20px;
+      background: rgba(254, 250, 224, 0.1); border: 1px solid rgba(254, 250, 224, 0.2);
+      padding: 12px 24px; border-radius: 50px; color: var(--cream);
+      font-size: 1.1rem; backdrop-filter: blur(5px); margin-bottom: 32px;
     }
-
     .detail-divider { width: 1px; height: 18px; background: rgba(254, 250, 224, 0.4); }
 
     .rsvp-btn {
-      display: inline-block;
-      background-color: var(--amber);
-      color: white;
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 16px 48px;
-      border-radius: 4px;
-      box-shadow: 0 10px 25px rgba(188, 108, 37, 0.3);
-      cursor: pointer; /* Keeps it clickable visually */
-      border: none;
+      display: inline-block; background-color: var(--amber); color: white;
+      font-size: 1.2rem; font-weight: 600; padding: 16px 48px;
+      border-radius: 4px; box-shadow: 0 10px 25px rgba(188, 108, 37, 0.3);
+      cursor: pointer; border: none; transition: all 0.3s;
     }
-    
-    .rsvp-btn:hover {
-      background-color: #a65d20;
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(188, 108, 37, 0.4);
-    }
+    .rsvp-btn:hover { background-color: #a65d20; transform: translateY(-2px); }
 
-    /* --- SPLIT CONTENT SECTION --- */
+    /* --- SPLIT CONTENT --- */
     .split-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      max-width: 1100px;
-      margin: -60px auto 60px; /* Pull up to overlap hero slightly */
-      position: relative;
-      z-index: 10;
-      gap: 0;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-      border-radius: 8px;
-      overflow: hidden;
+      display: grid; grid-template-columns: 1fr 1fr; max-width: 1100px;
+      margin: -60px auto 60px; position: relative; z-index: 10;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden;
     }
-
-    .split-col {
-      padding: 50px;
-    }
-
-    .split-left {
-      background: white;
-    }
-    .split-right {
-      background: var(--cream-dim);
-      border-left: 1px solid rgba(0,0,0,0.05);
-    }
-
+    .split-col { padding: 50px; }
+    .split-left { background: white; }
+    .split-right { background: var(--cream-dim); border-left: 1px solid rgba(0,0,0,0.05); }
     .audience-tag {
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 0.8rem;
-      color: var(--amber);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      display: block;
+      font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.8rem;
+      color: var(--amber); text-transform: uppercase; margin-bottom: 10px; display: block;
     }
 
-    /* --- IMPACT SECTION --- */
-    .impact-section {
-      text-align: center;
-      padding: 80px 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .impact-section p {
-      font-size: 1.1rem;
-      color: #4a4a4a;
-      margin-bottom: 30px;
-    }
-
+    /* --- IMPACT --- */
+    .impact-section { text-align: center; padding: 80px 20px; max-width: 800px; margin: 0 auto; }
+    .impact-section p { font-size: 1.1rem; color: #4a4a4a; margin-bottom: 30px; }
     .gold-text { color: var(--amber); font-weight: 600; }
 
-    /* --- FOOTER --- */
     footer {
-      background: var(--green-dark);
-      color: var(--cream);
-      padding: 40px 20px;
-      text-align: center;
-      font-size: 0.85rem;
-      opacity: 0.95;
+      background: var(--green-dark); color: var(--cream);
+      padding: 40px 20px; text-align: center; font-size: 0.85rem;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* --- RESPONSIVE --- */
+    /* --- MODAL STYLES --- */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(40, 54, 24, 0.85);
+      backdrop-filter: blur(5px); z-index: 2000;
+      display: none; justify-content: center; align-items: center; padding: 20px;
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active { display: flex; opacity: 1; }
+
+    .modal-card {
+      background: var(--cream); width: 100%; max-width: 500px;
+      border-radius: 12px; padding: 40px; position: relative;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      transform: translateY(20px); transition: transform 0.3s ease;
+    }
+    .modal-overlay.active .modal-card { transform: translateY(0); }
+
+    .close-modal {
+      position: absolute; top: 20px; right: 20px; background: none; border: none;
+      font-size: 1.5rem; color: var(--green-dark); cursor: pointer;
+    }
+    
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--green-dark); font-size: 0.9rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px;
+      font-family: 'Inter', sans-serif; font-size: 1rem;
+    }
+    .form-group input:focus { outline: 2px solid var(--amber); border-color: transparent; }
+
+    .btn-submit {
+      width: 100%; background: var(--green-dark); color: white; padding: 14px;
+      border: none; border-radius: 6px; font-weight: 600; font-size: 1rem; cursor: pointer;
+    }
+    .btn-submit:hover { background: var(--green-mid); }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+
+    /* Custom Notification (No Alert) */
+    .notification {
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      background: white; padding: 15px 25px; border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 3000;
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .notification.show { opacity: 1; top: 40px; }
+    .notification.success { border-left: 4px solid #28a745; }
+    .notification.error { border-left: 4px solid #dc3545; }
+
     @media (max-width: 800px) {
       .event-title { font-size: 2.5rem; }
       .event-details-pill { flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; }
       .detail-divider { display: none; }
-      
       .split-section { grid-template-columns: 1fr; margin: 0; border-radius: 0; box-shadow: none; }
       .split-col { padding: 40px 20px; }
     }
@@ -242,8 +187,7 @@
 </head>
 
 <body>
-
-  <!-- Minimal Nav -->
+  <!-- Nav -->
   <nav class="top-bar">
     <a href="index.html" class="logo-text">RIQE</a>
     <a href="index.html" class="nav-link">← Back to Main Site</a>
@@ -258,67 +202,155 @@
       <div class="event-details-pill">
         <span>Location: <strong>Dallas, TX</strong></span>
         <div class="detail-divider"></div>
-        <span>Venue: <strong>Private Venue</strong></span>
+        <span>Date: <strong>Coming Soon</strong></span>
       </div>
 
-      <!-- RSVP Button (Functionality Placeholder) -->
-      <button class="rsvp-btn" type="button">RSVP Now</button>
-      
+      <button class="rsvp-btn" id="openModalBtn">RSVP Now</button>
       <p style="margin-top: 15px; color: rgba(254,250,224,0.7); font-size: 0.9rem;">
-        Venue details will be sent to registered guests.
+        Venue details sent to registered guests.
       </p>
     </div>
   </header>
 
-  <!-- Audience Split -->
+  <!-- Split Content -->
   <section class="split-section">
-    <!-- For Professionals -->
     <div class="split-col split-left">
       <span class="audience-tag">For Industry Professionals</span>
       <h3>Connect with Talent</h3>
       <p style="margin-top: 15px; color: #555;">
-        Meet the top-performing students from the Rindler Institute. This is a unique opportunity to scout emerging quantitative talent in an informal setting before they hit the general job market.
+        Meet the top-performing students from the Rindler Institute. Scout emerging quantitative talent in an informal setting.
       </p>
-      <ul style="margin-top: 20px; list-style: none;">
-        <li style="margin-bottom: 8px;">✓ Network with other buy-side professionals</li>
-        <li style="margin-bottom: 8px;">✓ Meet incredibly talented students</li>
-      </ul>
     </div>
-
-    <!-- For Students -->
     <div class="split-col split-right">
       <span class="audience-tag">For Prospective Students</span>
       <h3>Define Your Future</h3>
       <p style="margin-top: 15px; color: #555;">
-        Interested in joining the next RIQE cohort? Come have a drink (or mocktail) with our directors and alumni. Learn exactly what it takes to break into quantitative finance.
+        Come have a drink (or mocktail) with our directors and alumni. Learn exactly what it takes to break into quantitative finance.
       </p>
-      <ul style="margin-top: 20px; list-style: none;">
-        <li style="margin-bottom: 8px;">✓ Get application advice</li>
-        <li style="margin-bottom: 8px;">✓ Meet potential mentors</li>
-      </ul>
     </div>
   </section>
 
-  <!-- Fundraising Goal -->
+  <!-- Impact -->
   <section class="impact-section">
     <h2>Supporting the Scholarship Fund</h2>
-    <p style="margin-top: 20px;">
-      Proceeds and donations from this event go directly to the <span class="gold-text">RIQE Student Scholarship Fund</span>.
-    </p>
-    <p>
-      Your attendance helps us provide data licenses, compute credits, and merit-based stipends to students who otherwise wouldn't have access to institutional-grade research tools.
-    </p>
-    <a href="donate.html" class="rsvp-btn" 
-   style="padding: 12px 30px; font-size: 1rem; background: var(--green-dark); 
-          color: white; text-decoration: none; display: inline-block; border-radius: 6px;">
-  Can't Attend? Donate Here
-</a>
+    <p style="margin-top: 20px;">Proceeds go directly to the <span class="gold-text">RIQE Student Scholarship Fund</span>.</p>
+    <a href="donate.html" class="rsvp-btn" style="padding: 12px 30px; font-size: 1rem; background: var(--green-dark); text-decoration:none;">
+      Can't Attend? Donate Here
+    </a>
   </section>
 
   <footer>
     <p>© 2025 Rindler Institute of Quantitative Education (RIQE)</p>
-    <p style="opacity: 0.6; margin-top: 8px;">501(c)(3) Nonprofit Organization</p>
   </footer>
 
+  <!-- RSVP MODAL -->
+  <div class="modal-overlay" id="rsvpModal">
+    <div class="modal-card">
+      <button class="close-modal" id="closeModalBtn">&times;</button>
+      <h2 style="font-size: 1.8rem; margin-bottom: 10px;">RSVP</h2>
+      <p style="color: #666; margin-bottom: 25px; font-size: 0.9rem;">
+        Please enter your details to receive the invitation.
+      </p>
+      
+      <form id="rsvpForm">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" name="name" required placeholder="Jane Doe">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" required placeholder="jane@example.com">
+        </div>
+        <div class="form-group">
+          <label>Number of Guests</label>
+          <select name="guests">
+            <option value="1">Just Me</option>
+            <option value="2">+1 Guest</option>
+            <option value="3">+2 Guests</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Comments / Questions (Optional)</label>
+          <textarea name="comments" rows="2"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Submit RSVP</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div class="notification" id="notification">
+    <span id="notif-icon">✅</span>
+    <span id="notif-msg">Success!</span>
+  </div>
+
+  <script>
+    // --- CONFIGURATION ---
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx86sJj8GFx259PDM6g08xHureldC7fbj_Z34qCI7Jw3YNRufR0YnrwZk7I7C8rQG_YiQ/exec"; 
+
+    // --- MODAL LOGIC ---
+    const modal = document.getElementById('rsvpModal');
+    const openBtn = document.getElementById('openModalBtn');
+    const closeBtn = document.getElementById('closeModalBtn');
+
+    openBtn.addEventListener('click', () => {
+      modal.classList.add('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    // Close on outside click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+
+    // --- FORM SUBMISSION ---
+    const form = document.getElementById('rsvpForm');
+    const submitBtn = document.querySelector('.btn-submit');
+    const notif = document.getElementById('notification');
+    const notifMsg = document.getElementById('notif-msg');
+    const notifIcon = document.getElementById('notif-icon');
+
+    function showNotification(msg, isError = false) {
+      notifMsg.textContent = msg;
+      notifIcon.textContent = isError ? '❌' : '✅';
+      notif.className = `notification show ${isError ? 'error' : 'success'}`;
+      setTimeout(() => {
+        notif.classList.remove('show');
+      }, 4000);
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Important for Google Scripts
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        showNotification("Thank you! Your RSVP has been sent.");
+        form.reset();
+        setTimeout(() => modal.classList.remove('active'), 1500);
+      })
+      .catch(err => {
+        console.error(err);
+        showNotification("Network error. Please try again.", true);
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit RSVP";
+      });
+    });
+  </script>
 </body>
 </html>
