@@ -1,743 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-8NGQXW18FD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8NGQXW18FD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8NGQXW18FD');
+  </script>
 
-  gtag('config', 'G-8NGQXW18FD');
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Donate – Support RIQE’s Quantitative Education Mission</title>
-
-<link rel="canonical" href="https://riqe.org/donate" />
-
-<meta name="description" content="Support RIQE’s mission to expand quantitative finance and mathematics education for undergraduates by funding scholarships, research projects, and student resources." />
-<meta name="keywords" content="RIQE donate, support RIQE, nonprofit donation, quantitative education, math education funding, student scholarships" />
-<meta name="robots" content="index, follow" />
-
-<!-- Open Graph -->
-<meta property="og:title" content="Donate – Support RIQE’s Quantitative Education Mission" />
-<meta property="og:description" content="Help RIQE build a rigorous quant lab and research experience for undergraduates in finance, math, and computing." />
-<meta property="og:url" content="https://riqe.org/donate" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="RIQE" />
-<meta property="og:image" content="https://riqe.org/og-image.png" />
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Donate – Support RIQE’s Quantitative Education Mission" />
-<meta name="twitter:description" content="Contribute to RIQE so more students can access serious training in quantitative finance, mathematics, and computational research." />
-<meta name="twitter:image" content="https://riqe.org/og-image.png" />
-
-
-    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="shortcut icon" href="favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-  <link rel="manifest" href="site.webmanifest" />
+  <title>Donate – Support RIQE</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
+    .float-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--amber); /* Uses your site's amber #bc6c25 */
+    color: white !important; /* Forces white text */
+    padding: 16px 30px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(188, 108, 37, 0.4);
+    border: 2px solid white; /* Adds a clean pop against the background */
+    transition: all 0.3s ease;
+    animation: pulse-glow 2s infinite;
+  }
+
+  .float-btn:hover {
+    transform: translateY(-5px);
+    background-color: #a65d20; /* Slightly darker on hover */
+    box-shadow: 0 8px 25px rgba(188, 108, 37, 0.6);
+  }
+
+  /* Pulse Animation to make it "stick out" */
+  @keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(188, 108, 37, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(188, 108, 37, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(188, 108, 37, 0); }
+  }
+
+  /* Mobile Adjustment */
+  @media (max-width: 600px) {
+    .float-btn {
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 24px;
+      font-size: 0.8rem;
+    }
+  }
     :root {
       --green-dark: #283618;
       --green-mid: #606c38;
       --cream: #fefae0;
       --gold: #dda15e;
       --amber: #bc6c25;
+      --header-height: 70px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      min-height: 100vh;
-      color: #283618;
+      font-family: 'Inter', sans-serif;
       background-color: var(--cream);
-    }
-
-    /* simple load-in animations */
-    @keyframes slideDown {
-      0% {
-        transform: translateY(-20px);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeUp {
-      0% {
-        transform: translateY(16px);
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    /* Respect reduced-motion preference */
-    @media (prefers-reduced-motion: reduce) {
-      .top-bar,
-      .donate-inner,
-      .donate-card {
-        animation: none !important;
-        transform: none !important;
-        opacity: 1 !important;
-      }
-    }
-
-    /* Top fixed bar */
-    .top-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 48px;
-      background: rgba(240,236,210, 0.99);
-      border-bottom: 1px solid rgba(40,54,24, 0.2);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      padding: 0 24px;
-
-      /* slide in from top */
-      transform: translateY(-20px);
-      opacity: 0;
-      animation: slideDown 0.5s ease-out forwards;
-    }
-
-    /* Inner row so we can control wrapping on mobile */
-    .top-bar-main {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .top-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .top-divider {
-      width: 1px;
-      height: 32px;
-      background: rgba(0, 0, 0, 0.3);
-    }
-
-    .nav-links {
-      margin-left: 32px;
-      display: flex;
-      gap: 20px;
-      flex: 1;
-    }
-
-    .nav-links a {
-      color: #283618;
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 600;
-      padding: 6px 10px;
-      border-radius: 6px;
-      transition: background 0.15s ease, transform 0.15s ease;
-      white-space: nowrap;
-    }
-
-    .nav-links a:hover {
-      background: rgba(0, 0, 0, 0.15);
-      transform: translateY(-1px);
-    }
-
-    .top-right {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .top-donate-btn {
-      background: #283618;
-      color: #fefae0;
-      border: 1px solid #606c38;
-      padding: 6px 14px;
-      border-radius: 14px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
-      white-space: nowrap;
-    }
-
-    .top-donate-btn:hover {
-      background: #3b4d29;
-      border-color: #dda15e;
-      transform: translateY(-1px);
-    }
-
-    .top-socials img {
-      height: 40px;
-      width: 40px;
-      opacity: 0.75;
-      cursor: pointer;
-      transition: opacity 0.15s ease, transform 0.15s ease;
-      filter: brightness(0) invert(1);
-    }
-
-    .top-socials img:hover {
-      opacity: 1;
-      transform: translateY(-1px);
-    }
-
-    .logo {
-      height: 100px;
-      width: auto;
-      object-fit: contain;
-      margin-right: 16px;
-      filter: brightness(0) saturate(100%)
-              invert(15%) sepia(16%) saturate(700%) hue-rotate(50deg)
-              brightness(90%) contrast(90%);
-    }
-
-    /* Hamburger/menu button */
-    .menu-toggle {
-      display: none;
-      margin-left: 8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(40, 54, 24, 0.35);
-      background: rgba(254, 250, 224, 0.96);
-      cursor: pointer;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #283618;
-    }
-
-    .menu-toggle:focus-visible {
-      outline: 2px solid #283618;
-      outline-offset: 2px;
-    }
-
-    .menu-lines {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .menu-lines .line {
-      width: 18px;
-      height: 2px;
-      background: #283618;
-      margin: 2px 0;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .menu-label {
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    /* X animation when menu is open */
-    .top-bar.menu-open .menu-lines .line:nth-child(1) {
-      transform: translateY(2px) rotate(45deg);
-    }
-
-    .top-bar.menu-open .menu-lines .line:nth-child(2) {
-      transform: translateY(-2px) rotate(-45deg);
-    }
-
-    /* Page layout */
-    .donate-page {
-      min-height: 100vh;
-      padding: 80px 10vw 48px; 
-      display: flex;
-      justify-content: center;
-    }
-
-    .donate-inner {
-      max-width: 900px;
-      width: 100%;
-      background: rgba(254, 250, 224, 0.95);
-      border-radius: 20px;
-      padding: 32px 28px 28px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
-      border: 1px solid rgba(40, 54, 24, 0.15);
-
-      /* main card fade-up */
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fadeUp 0.6s ease-out 0.15s forwards;
-    }
-
-    .donate-badge {
-      display: inline-block;
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #8a4f1c;
-      background: rgba(188, 108, 37, 0.08);
-      border-radius: 999px;
-      padding: 4px 12px;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    .donate-inner h1 {
-      font-size: 2rem;
-      margin-bottom: 8px;
-      color: var(--amber);
-    }
-
-    .donate-tagline {
-      font-size: 0.98rem;
-      color: #7b4a1b;
-      margin-bottom: 20px;
-    }
-
-    .donate-inner p {
-      font-size: 0.97rem;
+      color: #1a1a1a;
       line-height: 1.6;
-      margin-bottom: 12px;
-      color: #3a3a2a;
     }
+
+    h1, h2, h3 { font-family: 'Libre Baskerville', serif; color: var(--green-dark); }
+    a { text-decoration: none; color: inherit; transition: all 0.2s; }
+
+    /* --- NAV --- */
+    .top-bar {
+      position: fixed; top: 0; left: 0; width: 100%; height: var(--header-height);
+      background: rgba(254, 250, 224, 0.95); backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(40, 54, 24, 0.1); z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between; padding: 0 5%;
+    }
+    .logo-area { font-weight: 800; font-size: 1.5rem; color: var(--green-dark); font-family: 'Libre Baskerville'; }
+    
+    .desktop-nav { display: flex; gap: 30px; }
+    .desktop-nav a { font-weight: 500; color: var(--green-dark); }
+    .desktop-nav a:hover { color: var(--amber); }
+
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .bar { width: 25px; height: 2px; background: var(--green-dark); transition: 0.3s; }
+
+    /* --- DONATE CONTENT --- */
+    .donate-wrapper {
+      padding: 120px 5% 60px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .intro-section {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .intro-section h1 { font-size: 2.5rem; margin-bottom: 15px; }
+    .intro-section p { max-width: 600px; margin: 0 auto; color: #555; }
 
     .donate-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 18px;
-      margin: 26px 0 18px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
     }
 
     .donate-card {
-      background: #fefae0;
-      border-radius: 16px;
-      padding: 16px 18px 18px;
-      border: 1px solid rgba(40, 54, 24, 0.12);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
-
-      /* fade-up with stagger */
-      opacity: 0;
-      transform: translateY(12px);
-      animation: fadeUp 0.45s ease-out forwards;
-    }
-
-    .donate-card:nth-child(1) {
-      animation-delay: 0.25s;
-    }
-
-    .donate-card:nth-child(2) {
-      animation-delay: 0.33s;
-    }
-
-    .donate-card:nth-child(3) {
-      animation-delay: 0.41s;
-    }
-
-    .donate-card h2 {
-      font-size: 1.1rem;
-      margin-bottom: 8px;
-      color: var(--amber);
-    }
-
-    .donate-card p {
-      font-size: 0.9rem;
-      margin-bottom: 8px;
-    }
-
-    /* Reuse button styles from main page */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 20px;
-      border-radius: 999px;
-      border: 2px solid transparent;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
-        background-color 0.12s ease-out, color 0.12s ease-out,
-        border-color 0.12s ease-out;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: var(--amber);
-      color: var(--cream);
-      box-shadow: 0 10px 20px rgba(188, 108, 37, 0.4);
-    }
-
-    .btn-primary:hover {
-      background: #a15416;
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(188, 108, 37, 0.5);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--amber);
-      border-color: var(--amber);
-      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(188, 108, 37, 0.08);
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
-    }
-
-    .donate-footer-note {
-      margin-top: 18px;
-      font-size: 0.85rem;
-      color: #55523b;
-    }
-
-    .back-link {
-      margin-top: 20px;
-      font-size: 0.9rem;
-    }
-
-    .back-link a {
-      color: var(--amber);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .back-link a:hover {
-      text-decoration: underline;
-    }
-
-    .site-footer {
-      background: var(--green-dark);
-      color: var(--cream);
-      padding: 24px 10vw 28px;
-      font-size: 0.85rem;
-    }
-
-    .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 24px;
-    }
-
-    .footer-left p {
-      margin-top: 6px;
-      line-height: 1.5;
-    }
-
-    .footer-small {
-      font-size: 0.78rem;
-      opacity: 0.85;
-      margin-top: 6px;
-    }
-
-    .footer-right {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      text-align: right;
-      align-items: flex-end;
+      justify-content: space-between;
     }
+    .donate-card:hover { transform: translateY(-5px); }
 
-    .footer-right a {
+    .donate-card h2 { font-size: 1.2rem; margin-bottom: 10px; color: var(--amber); }
+    .donate-card p { font-size: 0.95rem; color: #555; margin-bottom: 20px; }
+
+    .btn-card {
+      text-align: center;
+      background: var(--green-dark);
       color: var(--cream);
-      text-decoration: none;
-      font-weight: 500;
+      padding: 10px;
+      border-radius: 4px;
+      font-weight: 600;
+      display: block;
     }
+    .btn-card:hover { background: var(--green-mid); }
+    .btn-card.secondary { background: transparent; border: 1px solid var(--amber); color: var(--amber); }
+    .btn-card.secondary:hover { background: rgba(188, 108, 37, 0.1); }
 
-    .footer-right a:hover {
-      text-decoration: underline;
-    }
-
-    /* ---------- RESPONSIVE ---------- */
-
+    /* RESPONSIVE */
     @media (max-width: 900px) {
-      .top-bar {
-        padding: 6px 16px 8px;
-        height: auto;
-      }
-
-      .top-bar-main {
-        height: auto;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        gap: 8px;
-      }
-
-      .logo {
-        height: 60px;
-        margin-right: 0;
-      }
-
-      .top-divider {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: inline-flex;
-        margin-left: auto;
-      }
-
-      /* Hide desktop nav & right side by default on mobile */
-      .nav-links,
-      .top-right {
-        display: none;
-        width: 100%;
-        background: rgba(240, 236, 210, 0.98);
-      }
-
-      .nav-links {
-        flex-direction: column;
-        gap: 8px;
-        margin-left: 0;
-        margin-top: 6px;
-        padding-top: 8px;
-        padding-bottom: 4px;
-        border-top: 1px solid rgba(40, 54, 24, 0.2);
-      }
-
-      .nav-links a {
-        padding: 6px 0;
-        font-size: 0.9rem;
-      }
-
-      .top-right {
-        justify-content: flex-start;
-        margin-left: 0;
-        margin-top: 4px;
-        padding-bottom: 4px;
-        gap: 12px;
-      }
-
-      /* When menu is open, show dropdown */
-      .top-bar.menu-open .nav-links,
-      .top-bar.menu-open .top-right {
-        display: flex;
-      }
-
-      .donate-page {
-        padding: 96px 16px 40px;
-      }
-
-      .donate-inner {
-        padding: 24px 20px 24px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        text-align: left;
-        align-items: flex-start;
-      }
-
-      .footer-right {
-        align-items: flex-start;
-        text-align: left;
-      }
+      .menu-toggle { display: flex; }
+      .desktop-nav { display: none; position: fixed; top: 70px; left: 0; width: 100%; background: var(--cream); flex-direction: column; padding: 20px; }
+      .desktop-nav.active { display: flex; }
     }
 
-    @media (max-width: 700px) {
-      .donate-inner {
-        padding: 22px 18px 18px;
-      }
-
-      .donate-inner h1 {
-        font-size: 1.7rem;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .logo {
-        height: 50px;
-      }
-
-      .donate-page {
-        padding: 100px 14px 36px;
-      }
-
-      .donate-inner {
-        border-radius: 18px;
-      }
-
-      .site-footer {
-        padding: 18px 6vw 20px;
-        font-size: 0.8rem;
-      }
+    footer {
+      background: var(--green-dark); color: var(--cream);
+      padding: 50px 5%; text-align: center; margin-top: 60px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top bar -->
-  <div class="top-bar">
-    <div class="top-bar-main">
-      <div class="top-left">
-        <a href="index.html" style="display:flex; align-items:center; gap:16px; text-decoration:none;">
-          <img src="riqe-logo.png" class="logo" alt="RIQE Logo">
-        </a>
-        <div class="top-divider"></div>
-      </div>
-
-      <nav class="nav-links">
-        <a href="index.html#about">About</a>
-        <a href="index.html#programaward">Program Awards</a>
-        <a href="index.html#curriculum">Curriculum Information</a>
-        <a href="apply.html">Apply</a>
-        <a href="mailto:info@riqe.org">Contact</a>
-      </nav>
-
-      <div class="top-right">
-        <!-- On this page, Donate just scrolls to the donate section -->
-        <a href="#donate" class="top-donate-btn">Donate</a>
-
-        <div class="top-socials">
-          <a href="https://github.com/" target="_blank">
-            <img src="githublogo.png" alt="GitHub">
-          </a>
-        </div>
-      </div>
-
-      <!-- Mobile menu button -->
-      <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <div class="menu-lines">
-          <span class="line"></span>
-          <span class="line"></span>
-        </div>
-        <span class="menu-label">Menu</span>
-      </button>
+  <nav class="top-bar">
+    <a href="index.html" class="logo-area">RIQE</a>
+    <button class="menu-toggle" aria-label="Toggle Menu">
+      <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    </button>
+    <div class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="apply.html">Apply</a>
+      <a href="mailto:info@riqe.org">Contact</a>
     </div>
-  </div>
+  </nav>
 
-  <!-- Main content -->
-  <main class="donate-page">
-    <section id="donate" class="donate-inner">
-      <span class="donate-badge">Support RIQE</span>
-      <h1>Invest in Quantitative Education</h1>
-      <p class="donate-tagline">
-        Your support helps RIQE provide research-style experiences, mentorship,
-        and scholarship-style support to driven students exploring quantitative finance,
-        mathematics, and computation.
-      </p>
+  <main class="donate-wrapper">
+    <div class="intro-section">
+      <h1>Invest in Future Quants</h1>
+      <p>Your support helps RIQE provide data licenses, compute credits, and scholarship support to driven students.</p>
+    </div>
 
-      <p>
-        Donations help cover data access, compute resources, curriculum development,
-        guest speakers, and need-based support for participants who might not otherwise
-        be able to take part.
-      </p>
-
-      <b>Status & Transparency</b>
-
-      <p>
-        RIQE is not currently a tax-exempt entity. If you choose to contribute,
-        your payment goes to a personal account until a RIQE bank account is active. My intention is to use these
-        funds to support early RIQE expenses (data, compute, curriculum work, etc.) while I work toward
-        formally establishing the nonprofit.
-      </p>
-
-      <div class="donate-grid">
-        <div class="donate-card">
+    <div class="donate-grid">
+      <!-- Card 1 -->
+      <div class="donate-card">
+        <div>
           <h2>Online Giving</h2>
-          <p>
-            Set up a one-time or recurring contribution through our online donation portal.
-          </p>
-          <a href="underconstruction.html" class="btn btn-primary">Donate Online</a>
+          <p>Make a contribution securely. Note: We are currently upgrading our portal.</p>
         </div>
-
-        <div class="donate-card">
-          <h2>Check or Bank Transfer</h2>
-          <p>
-            Prefer to give by check or bank transfer? Email us and we’ll share mailing
-            and routing details for RIQE.
-          </p>
-          <a href="mailto:info@riqe.org" class="btn btn-secondary">Email for Details</a>
-        </div>
-
-        <div class="donate-card">
-          <h2>Partner & Sponsor</h2>
-          <p>
-            Interested in sponsoring a cohort, funding a specific program award, or
-            partnering on a project? We’d love to talk.
-          </p>
-          <a href="mailto:info@riqe.org?subject=Partnership%20Inquiry" class="btn btn-secondary">
-            Discuss a Partnership
-          </a>
-        </div>
+        <a href="underconstruction.html" class="btn-card">Donate Now</a>
       </div>
 
-      <p class="donate-footer-note">
-        RIQE is a nonprofit educational initiative. Donations are used exclusively
-        to support programs and activities aligned with our mission. Please contact us
-        if you need formal documentation for employer matching or institutional giving.
-      </p>
-
-      <div class="back-link">
-        <a href="index.html">&larr; Back to RIQE Home</a>
+      <!-- Card 2 -->
+      <div class="donate-card">
+        <div>
+          <h2>Check or Wire</h2>
+          <p>Prefer traditional methods? Contact us for routing details.</p>
+        </div>
+        <a href="mailto:info@riqe.org" class="btn-card secondary">Email Us</a>
       </div>
-    </section>
+
+      <!-- Card 3 -->
+      <div class="donate-card">
+        <div>
+          <h2>Corporate Partnership</h2>
+          <p>Sponsor a cohort or fund a specific research award.</p>
+        </div>
+        <a href="mailto:info@riqe.org?subject=Partnership" class="btn-card secondary">Partner With Us</a>
+      </div>
+    </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-left">
-        <strong>Rindler Institute of Quantitative Education (RIQE)</strong>
-        <p class="footer-small">
-          This site and program are for educational purposes only and do not
-          constitute financial advice or a solicitation to trade securities.
-        </p>
-      </div>
-      <div class="footer-right">
-        <a href="mailto:info@riqe.org">info@riqe.org</a>
-        <a href="privpolicy.html" class="footer-small">Privacy Policy</a>
-        <span class="footer-small">© 2025 RIQE. All rights reserved.</span>
-      </div>
-    </div>
+  <footer>
+    <p>© 2025 RIQE. All rights reserved.</p>
   </footer>
 
+  <a href="fundraiser.html" class="float-btn">
+  <span>🎟️</span> Dallas Fundraiser
+</a>
+
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const topBar = document.querySelector('.top-bar');
-      const toggle = document.querySelector('.menu-toggle');
-      const navLinks = document.querySelectorAll('.nav-links a');
-
-      if (topBar && toggle) {
-        toggle.addEventListener('click', function () {
-          const isOpen = topBar.classList.toggle('menu-open');
-          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        });
-
-        // Close the menu when a nav link is clicked (on mobile)
-        navLinks.forEach(link => {
-          link.addEventListener('click', () => {
-            if (topBar.classList.contains('menu-open')) {
-              topBar.classList.remove('menu-open');
-              toggle.setAttribute('aria-expanded', 'false');
-            }
-          });
-        });
-      }
-    });
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.desktop-nav');
+    toggle.addEventListener('click', () => nav.classList.toggle('active'));
   </script>
-
 </body>
 </html>

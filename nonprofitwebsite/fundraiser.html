@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8NGQXW18FD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8NGQXW18FD');
+  </script>
+
+  <meta charset="UTF-8" />
+  <title>RIQE Dallas Mixer – Networking & Fundraiser</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Join the Rindler Institute for an exclusive networking mixer in Dallas. Connect with industry professionals and support the next generation of quant talent." />
+
+  <!-- Fonts: Libre Baskerville & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Palette (Consistent with Main Site) */
+      --green-dark: #283618;
+      --green-mid: #606c38;
+      --cream: #fefae0;
+      --cream-dim: #f2ebd4;
+      --gold: #dda15e;
+      --amber: #bc6c25;
+      
+      --header-height: 70px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--cream);
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--green-dark);
+    }
+
+    a { text-decoration: none; color: inherit; transition: all 0.2s; }
+
+    /* --- NAVIGATION (Simplified for Event Page) --- */
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      height: var(--header-height);
+      background: rgba(254, 250, 224, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(40, 54, 24, 0.1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+    }
+
+    .logo-text {
+      font-weight: 800; 
+      font-size: 1.5rem; 
+      color: var(--green-dark); 
+      font-family: 'Libre Baskerville';
+    }
+
+    .nav-link {
+      font-weight: 600;
+      color: var(--green-dark);
+      font-size: 0.9rem;
+    }
+
+    .nav-link:hover { color: var(--amber); }
+
+    /* --- EVENT HERO SECTION --- */
+    .event-hero {
+      background-color: var(--green-dark);
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 100px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Abstract Background Pattern */
+    .event-hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(221, 161, 94, 0.1) 0%, transparent 50%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      animation: fadeUp 1s ease-out;
+    }
+
+    .event-eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .event-title {
+      font-size: 3.5rem;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .event-details-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(254, 250, 224, 0.1);
+      border: 1px solid rgba(254, 250, 224, 0.2);
+      padding: 12px 24px;
+      border-radius: 50px;
+      color: var(--cream);
+      font-size: 1.1rem;
+      backdrop-filter: blur(5px);
+      margin-bottom: 32px;
+    }
+
+    .detail-divider { width: 1px; height: 18px; background: rgba(254, 250, 224, 0.4); }
+
+    .rsvp-btn {
+      display: inline-block;
+      background-color: var(--amber);
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 16px 48px;
+      border-radius: 4px;
+      box-shadow: 0 10px 25px rgba(188, 108, 37, 0.3);
+      cursor: pointer; /* Keeps it clickable visually */
+      border: none;
+    }
+    
+    .rsvp-btn:hover {
+      background-color: #a65d20;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(188, 108, 37, 0.4);
+    }
+
+    /* --- SPLIT CONTENT SECTION --- */
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1100px;
+      margin: -60px auto 60px; /* Pull up to overlap hero slightly */
+      position: relative;
+      z-index: 10;
+      gap: 0;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .split-col {
+      padding: 50px;
+    }
+
+    .split-left {
+      background: white;
+    }
+    .split-right {
+      background: var(--cream-dim);
+      border-left: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .audience-tag {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* --- IMPACT SECTION --- */
+    .impact-section {
+      text-align: center;
+      padding: 80px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .impact-section p {
+      font-size: 1.1rem;
+      color: #4a4a4a;
+      margin-bottom: 30px;
+    }
+
+    .gold-text { color: var(--amber); font-weight: 600; }
+
+    /* --- FOOTER --- */
+    footer {
+      background: var(--green-dark);
+      color: var(--cream);
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      opacity: 0.95;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 800px) {
+      .event-title { font-size: 2.5rem; }
+      .event-details-pill { flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; }
+      .detail-divider { display: none; }
+      
+      .split-section { grid-template-columns: 1fr; margin: 0; border-radius: 0; box-shadow: none; }
+      .split-col { padding: 40px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Minimal Nav -->
+  <nav class="top-bar">
+    <a href="index.html" class="logo-text">RIQE</a>
+    <a href="index.html" class="nav-link">← Back to Main Site</a>
+  </nav>
+
+  <!-- Hero -->
+  <header class="event-hero">
+    <div class="hero-content">
+      <span class="event-eyebrow">The Rindler Institute Presents</span>
+      <h1 class="event-title">The Dallas Industry Mixer</h1>
+      
+      <div class="event-details-pill">
+        <span>Location: <strong>Dallas, TX</strong></span>
+        <div class="detail-divider"></div>
+        <span>Venue: <strong>Private Venue</strong></span>
+      </div>
+
+      <!-- RSVP Button (Functionality Placeholder) -->
+      <button class="rsvp-btn" type="button">RSVP Now</button>
+      
+      <p style="margin-top: 15px; color: rgba(254,250,224,0.7); font-size: 0.9rem;">
+        Venue details will be sent to registered guests.
+      </p>
+    </div>
+  </header>
+
+  <!-- Audience Split -->
+  <section class="split-section">
+    <!-- For Professionals -->
+    <div class="split-col split-left">
+      <span class="audience-tag">For Industry Professionals</span>
+      <h3>Connect with Talent</h3>
+      <p style="margin-top: 15px; color: #555;">
+        Meet the top-performing students from the Rindler Institute. This is a unique opportunity to scout emerging quantitative talent in an informal setting before they hit the general job market.
+      </p>
+      <ul style="margin-top: 20px; list-style: none;">
+        <li style="margin-bottom: 8px;">✓ Network with other buy-side professionals</li>
+        <li style="margin-bottom: 8px;">✓ Meet incredibly talented students</li>
+      </ul>
+    </div>
+
+    <!-- For Students -->
+    <div class="split-col split-right">
+      <span class="audience-tag">For Prospective Students</span>
+      <h3>Define Your Future</h3>
+      <p style="margin-top: 15px; color: #555;">
+        Interested in joining the next RIQE cohort? Come have a drink (or mocktail) with our directors and alumni. Learn exactly what it takes to break into quantitative finance.
+      </p>
+      <ul style="margin-top: 20px; list-style: none;">
+        <li style="margin-bottom: 8px;">✓ Get application advice</li>
+        <li style="margin-bottom: 8px;">✓ Meet potential mentors</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Fundraising Goal -->
+  <section class="impact-section">
+    <h2>Supporting the Scholarship Fund</h2>
+    <p style="margin-top: 20px;">
+      Proceeds and donations from this event go directly to the <span class="gold-text">RIQE Student Scholarship Fund</span>.
+    </p>
+    <p>
+      Your attendance helps us provide data licenses, compute credits, and merit-based stipends to students who otherwise wouldn't have access to institutional-grade research tools.
+    </p>
+    <a href="donate.html" class="rsvp-btn" 
+   style="padding: 12px 30px; font-size: 1rem; background: var(--green-dark); 
+          color: white; text-decoration: none; display: inline-block; border-radius: 6px;">
+  Can't Attend? Donate Here
+</a>
+  </section>
+
+  <footer>
+    <p>© 2025 Rindler Institute of Quantitative Education (RIQE)</p>
+    <p style="opacity: 0.6; margin-top: 8px;">501(c)(3) Nonprofit Organization</p>
+  </footer>
+
+</body>
+</html>
