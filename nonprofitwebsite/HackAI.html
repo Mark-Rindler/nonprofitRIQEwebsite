@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NLP in Finance Workshop | RIQE</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-dark: #283618;
+    --green-mid: #606c38;
+    --cream: #fefae0;
+    --cream-dim: #f2ebd4;
+    --gold: #dda15e;
+    --amber: #bc6c25;
+    --text-dark: #1a1a0e;
+    --text-muted: #5c5a4a;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', Georgia, serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--green-dark);
+    color: var(--cream);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 80%;
+    height: 200%;
+    background: radial-gradient(ellipse, rgba(96,108,56,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 32px 60px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(221,161,94,0.12);
+    border: 1px solid rgba(221,161,94,0.3);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 40px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    animation: fadeDown 0.7s ease 0.1s both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+    color: rgba(254,250,224,0.65);
+    max-width: 600px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    animation: fadeDown 0.7s ease 0.2s both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeDown 0.7s ease 0.3s both;
+  }
+
+  .hero-cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--green-dark);
+  }
+
+  .btn-primary:hover {
+    background: var(--amber);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(221,161,94,0.3);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(254,250,224,0.25);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .hero-meta {
+    margin-top: 60px;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    animation: fadeDown 0.7s ease 0.4s both;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .hero-meta-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(254,250,224,0.4);
+    font-weight: 600;
+  }
+
+  .hero-meta-value {
+    font-size: 15px;
+    color: rgba(254,250,224,0.8);
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SECTIONS ===== */
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 32px;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 12px;
+  }
+
+  .section h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: var(--green-dark);
+  }
+
+  .section p.lead {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 650px;
+    margin-bottom: 40px;
+  }
+
+  /* ===== STORY RECAP ===== */
+  .story-divider {
+    background: var(--cream-dim);
+    border-top: 1px solid rgba(40,54,24,0.08);
+    border-bottom: 1px solid rgba(40,54,24,0.08);
+  }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .story-card {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .story-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  .story-icon.year {
+    background: var(--green-dark);
+    color: var(--gold);
+  }
+
+  .story-icon.now {
+    background: var(--gold);
+    color: var(--green-dark);
+  }
+
+  .story-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 4px;
+  }
+
+  .story-card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ===== STEPS ===== */
+  .steps-list {
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(40,54,24,0.08);
+    position: relative;
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--green-dark);
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .step h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 4px;
+  }
+
+  .step p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .step code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    background: rgba(40,54,24,0.07);
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--green-mid);
+  }
+
+  .step .tip {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(221,161,94,0.1);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.88rem;
+    color: var(--amber);
+  }
+
+  /* ===== DOWNLOADS ===== */
+  .downloads-section {
+    background: var(--green-dark);
+    color: var(--cream);
+  }
+
+  .downloads-section .section-label { color: var(--gold); }
+  .downloads-section h2 { color: var(--cream); }
+  .downloads-section p.lead { color: rgba(254,250,224,0.6); }
+
+  .downloads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .download-card {
+    background: rgba(254,250,224,0.06);
+    border: 1px solid rgba(254,250,224,0.1);
+    border-radius: 10px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    color: var(--cream);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .download-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .download-card:hover::before { transform: scaleX(1); }
+
+  .download-card:hover {
+    background: rgba(254,250,224,0.1);
+    border-color: rgba(221,161,94,0.3);
+    transform: translateY(-3px);
+  }
+
+  .download-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(221,161,94,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .download-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .download-card p {
+    font-size: 0.85rem;
+    color: rgba(254,250,224,0.5);
+    line-height: 1.5;
+  }
+
+  .download-card .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding: 8px 16px;
+    background: var(--gold);
+    color: var(--green-dark);
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    width: fit-content;
+    transition: background 0.2s;
+  }
+
+  .download-card:hover .dl-btn { background: var(--amber); }
+
+  /* ===== KEY CONCEPTS ===== */
+  .concepts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .concept-card {
+    padding: 28px;
+    background: var(--white);
+    border-radius: 10px;
+    border: 1px solid rgba(40,54,24,0.08);
+    transition: all 0.25s ease;
+  }
+
+  .concept-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 8px 30px rgba(40,54,24,0.06);
+  }
+
+  .concept-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
+
+  .concept-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .concept-accent {
+    width: 28px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+
+  /* ===== FORMULA CALLOUT ===== */
+  .formula-callout {
+    background: var(--white);
+    border: 1px solid rgba(40,54,24,0.1);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    margin: 40px 0;
+  }
+
+  .formula-callout .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 16px;
+  }
+
+  .formula {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--green-dark);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .formula span {
+    color: var(--amber);
+  }
+
+  .formula-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--green-dark);
+    color: rgba(254,250,224,0.4);
+    text-align: center;
+    padding: 40px 32px;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(254,250,224,0.06);
+  }
+
+  .footer a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .footer a:hover { text-decoration: underline; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .hero-content { padding: 60px 20px 40px; }
+    .hero-meta { gap: 24px; }
+    .section { padding: 56px 20px; }
+    .concepts-grid { grid-template-columns: 1fr; }
+    .story-card { grid-template-columns: 48px 1fr; gap: 14px; }
+    .story-icon { width: 48px; height: 48px; font-size: 17px; }
+    .step { grid-template-columns: 44px 1fr; gap: 16px; }
+    .step-num { width: 40px; height: 40px; font-size: 14px; }
+    .downloads-grid { grid-template-columns: 1fr; }
+    .hero-cta { flex-direction: column; }
+    .hero-cta a { text-align: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Live Workshop</div>
+    <h1>From Headlines to<br><em>Trading Signals</em></h1>
+    <p class="hero-sub">You're about to build a complete NLP pipeline that scores financial news sentiment and compares it to real market data. Everything you need is on this page.</p>
+    <div class="hero-cta">
+      <a href="#downloads" class="btn-primary">↓&ensp;Get the Materials</a>
+      <a href="#steps" class="btn-ghost">Read the Instructions</a>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Duration</span>
+        <span class="hero-meta-value">20 minutes</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Tools</span>
+        <span class="hero-meta-value">Python or Google Colab</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Skill Level</span>
+        <span class="hero-meta-value">All levels welcome</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Presented by</span>
+        <span class="hero-meta-value">RIQE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY RECAP ===== -->
+<section class="story-divider">
+  <div class="section">
+    <span class="section-label">The Story So Far</span>
+    <h2>What we just covered</h2>
+    <p class="lead">The talk walked through the research that proved text contains tradeable financial information. Here's the arc.</p>
+
+    <div class="story-grid">
+      <div class="story-card">
+        <div class="story-icon year">07</div>
+        <div>
+          <h3>Tetlock proved word counts predict markets</h3>
+          <p>By scoring daily Wall Street Journal columns with a simple word list, Paul Tetlock showed that newspaper pessimism predicted next day market declines and trading volume spikes. No machine learning. Just counting negative words.</p>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="story-icon year">11</div>
+        <div>
+          <h3>Loughran &amp; McDonald fixed the dictionary</h3>
+          <p>The general purpose dictionary Tetlock used misclassified roughly 75% of "negative" financial words. Words like <em>liability</em>, <em>risk</em>, and <em>cost</em> aren't negative in finance. Loughran and McDonald built domain specific word lists from scratch, and that's what you'll use today.</p>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="story-icon now">You</div>
+        <div>
+          <h3>Now you replicate it with better tools</h3>
+          <p>You have real financial articles, the actual Loughran McDonald word lists, and real market data. In 20 minutes, you'll build the same pipeline those researchers built, but with the improved dictionary. Let's go.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FORMULA ===== -->
+<section>
+  <div class="section" style="padding-top: 48px; padding-bottom: 0;">
+    <div class="formula-callout">
+      <div class="label">The Core Formula</div>
+      <div class="formula">
+        Sentiment = (<span>positive</span> &minus; <span>negative</span>) &divide; total words
+      </div>
+      <div class="formula-note">That's it. Score each article, aggregate by month, and compare to the market.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STEPS ===== -->
+<section id="steps">
+  <div class="section">
+    <span class="section-label">Workshop Instructions</span>
+    <h2>Six steps, twenty minutes</h2>
+    <p class="lead">The starter notebook walks you through each step. Here's what you're doing and why.</p>
+
+    <div class="steps-list">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <h3>Load the data</h3>
+          <p>Open the starter notebook. Load the financial articles and the two Loughran McDonald word lists (positive and negative). If you're using Colab, upload the files first.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <h3>Read before you code</h3>
+          <p>Open one or two articles and actually read them. Scroll through the negative word list. Get a feel for the language. Financial text is measured. Small differences in tone carry meaning.</p>
+          <div class="tip">💡 This step matters more than you think. Students who skip it always struggle later.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <h3>Score each article</h3>
+          <p>Tokenize the text, count how many words appear in the positive list and the negative list, then compute the sentiment score: <code>(pos &minus; neg) / total</code>.</p>
+          <div class="tip">💡 Don't forget to lowercase your text. The word lists are all lowercase. If your scores are all near zero, that's correct. Financial text is subtle.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div>
+          <h3>Aggregate by month</h3>
+          <p>Group your article scores by month using a pandas <code>groupby</code>. This gives you a monthly sentiment time series.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div>
+          <h3>Plot sentiment vs. market data</h3>
+          <p>Merge your monthly sentiment scores with the provided market volatility data. Plot them together. Look for any visual relationship.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">06</div>
+        <div>
+          <h3>Interpret your results</h3>
+          <p>Compute the correlation between your sentiment signal and market volatility. Did you find a relationship? Positive or negative? Does it match what Tetlock found?</p>
+          <div class="tip">💡 If you didn't find a signal, that's a result too. Ask yourself: is the dataset too small? Would daily aggregation work better? In research, understanding why something doesn't work teaches you more than finding something that does.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DOWNLOADS ===== -->
+<section class="downloads-section" id="downloads">
+  <div class="section">
+    <span class="section-label">Materials</span>
+    <h2>Everything you need</h2>
+    <p class="lead">Download these files to get started. If you can't download, pair up with someone nearby.</p>
+
+    <div class="downloads-grid" style="grid-template-columns: 1fr; max-width: 480px; margin: 0 auto;">
+      <a class="download-card" href="https://drive.google.com/drive/folders/1nac8J_JQkafWdj9nUGR6brxE55vmAFpu?usp=drive_link" target="_blank" style="text-align: center; align-items: center;">
+        <div class="download-card-icon" style="margin: 0 auto;">📁</div>
+        <h3>All Workshop Files</h3>
+        <p>Starter notebook, financial articles, Loughran&ndash;McDonald word lists, VIX market data, and the data README. One folder, everything you need.</p>
+        <div class="dl-btn" style="margin: 0 auto;">↓&ensp;Open Google Drive Folder</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY CONCEPTS ===== -->
+<section>
+  <div class="section">
+    <span class="section-label">Key Concepts</span>
+    <h2>Ideas to keep in mind</h2>
+    <p class="lead">As you work through the exercise, these are the big takeaways from today's session.</p>
+
+    <div class="concepts-grid">
+      <div class="concept-card">
+        <div class="concept-accent"></div>
+        <h3>Context blindness</h3>
+        <p>"Not profitable" contains a positive word. Bag of words can't detect negation or sarcasm. It's the simplest possible method, and it still finds signal. Imagine what smarter methods can do.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-accent"></div>
+        <h3>Weak signals have value</h3>
+        <p>If your signal is right 52% of the time over a thousand trades, that's a profitable edge. In quantitative finance, you don't need to be right every time. You need to be right slightly more often than wrong, at scale.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-accent"></div>
+        <h3>Domain dictionaries matter</h3>
+        <p>Generic tools like VADER or TextBlob will give you worse results on financial text. The lesson is universal: off the shelf NLP fails in specialized domains unless you adapt it.</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-accent"></div>
+        <h3>Correlation ≠ Causation</h3>
+        <p>Does the newspaper's tone predict the market, or does the market's performance predict the newspaper's tone? Disentangling causality in time series data remains one of the field's hardest open problems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <p>RIQE&ensp;&middot;&ensp;HackAI Workshop&ensp;&middot;&ensp;<a href="https://riqe.org" target="_blank">riqe.org</a></p>
+</footer>
+
+</body>
+</html>
