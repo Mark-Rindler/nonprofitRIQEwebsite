@@ -12,59 +12,13 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Donate – Support RIQE</title>
+  <title>Support RIQE</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
-    .float-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: var(--amber); /* Uses your site's amber #bc6c25 */
-    color: white !important; /* Forces white text */
-    padding: 16px 30px;
-    border-radius: 50px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 9999;
-    box-shadow: 0 4px 15px rgba(188, 108, 37, 0.4);
-    border: 2px solid white; /* Adds a clean pop against the background */
-    transition: all 0.3s ease;
-    animation: pulse-glow 2s infinite;
-  }
-
-  .float-btn:hover {
-    transform: translateY(-5px);
-    background-color: #a65d20; /* Slightly darker on hover */
-    box-shadow: 0 8px 25px rgba(188, 108, 37, 0.6);
-  }
-
-  /* Pulse Animation to make it "stick out" */
-  @keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 rgba(188, 108, 37, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(188, 108, 37, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(188, 108, 37, 0); }
-  }
-
-  /* Mobile Adjustment */
-  @media (max-width: 600px) {
-    .float-btn {
-      bottom: 20px;
-      right: 20px;
-      padding: 12px 24px;
-      font-size: 0.8rem;
-    }
-  }
     :root {
       --green-dark: #283618;
       --green-mid: #606c38;
@@ -138,6 +92,20 @@
     .donate-card h2 { font-size: 1.2rem; margin-bottom: 10px; color: var(--amber); }
     .donate-card p { font-size: 0.95rem; color: #555; margin-bottom: 20px; }
 
+    .quiet-note {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: #777;
+    }
+
+    .quiet-note a {
+      color: var(--green-dark);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
     .btn-card {
       text-align: center;
       background: var(--green-dark);
@@ -180,42 +148,43 @@
 
   <main class="donate-wrapper">
     <div class="intro-section">
-      <h1>Invest in Future Quants</h1>
-      <p>Your support helps RIQE provide data licenses, compute credits, and scholarship support to driven students.</p>
+      <h1>Support RIQE</h1>
+      <p>RIQE is a 501(c)(3) nonprofit research cohort. Support helps students access data, compute, research materials, and project funding.</p>
     </div>
 
     <div class="donate-grid">
-      <!-- Card 1 -->
       <div class="donate-card">
         <div>
-          <h2>Online Giving</h2>
-          <p>Make a contribution securely. Note: We are currently upgrading our portal.</p>
+          <h2>Research Infrastructure</h2>
+          <p>Fund the data sets, compute credits, tooling, and materials students need to reproduce and extend quantitative market research.</p>
         </div>
-        <a href="underconstruction.html" class="btn-card">Donate Now</a>
+        <a href="mailto:info@riqe.org?subject=Supporting%20RIQE%20Research" class="btn-card">Start a Conversation</a>
       </div>
 
-      <!-- Card 2 -->
       <div class="donate-card">
         <div>
-          <h2>Check or Wire</h2>
-          <p>Prefer traditional methods? Contact us for routing details.</p>
+          <h2>Student Support</h2>
+          <p>Help reduce financial barriers for students contributing strong research, code, presentations, and cohort leadership.</p>
         </div>
-        <a href="mailto:info@riqe.org" class="btn-card secondary">Email Us</a>
+        <a href="mailto:info@riqe.org?subject=RIQE%20Student%20Support" class="btn-card secondary">Email Us</a>
       </div>
 
-      <!-- Card 3 -->
       <div class="donate-card">
         <div>
-          <h2>Corporate Partnership</h2>
-          <p>Sponsor a cohort or fund a specific research award.</p>
+          <h2>Research Partnership</h2>
+          <p>Sponsor a cohort, fund a research award, or support a focused project aligned with quantitative market research.</p>
         </div>
         <a href="mailto:info@riqe.org?subject=Partnership" class="btn-card secondary">Partner With Us</a>
       </div>
     </div>
+
+    <p class="quiet-note">
+      Online giving is being finalized. In the meantime, contact <a href="mailto:info@riqe.org?subject=Supporting%20RIQE">info@riqe.org</a> for contribution instructions and receipt details.
+    </p>
   </main>
 
   <footer>
-    <p>© 2025 RIQE. All rights reserved.</p>
+    <p>RIQE is a 501(c)(3) nonprofit organization. © 2025 RIQE. All rights reserved.</p>
   </footer>
 
 

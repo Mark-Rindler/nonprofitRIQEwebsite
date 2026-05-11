@@ -22,52 +22,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
-    .float-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: var(--amber); /* Uses your site's amber #bc6c25 */
-    color: white !important; /* Forces white text */
-    padding: 16px 30px;
-    border-radius: 50px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 9999;
-    box-shadow: 0 4px 15px rgba(188, 108, 37, 0.4);
-    border: 2px solid white; /* Adds a clean pop against the background */
-    transition: all 0.3s ease;
-    animation: pulse-glow 2s infinite;
-  }
-
-  .float-btn:hover {
-    transform: translateY(-5px);
-    background-color: #a65d20; /* Slightly darker on hover */
-    box-shadow: 0 8px 25px rgba(188, 108, 37, 0.6);
-  }
-
-  /* Pulse Animation to make it "stick out" */
-  @keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 rgba(188, 108, 37, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(188, 108, 37, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(188, 108, 37, 0); }
-  }
-
-  /* Mobile Adjustment */
-  @media (max-width: 600px) {
-    .float-btn {
-      bottom: 20px;
-      right: 20px;
-      padding: 12px 24px;
-      font-size: 0.8rem;
-    }
-  }
     :root {
       --green-dark: #283618;
       --green-mid: #606c38;
@@ -192,11 +146,11 @@
     </button>
     <div class="desktop-nav">
       <a href="index.html#about">About</a>
-      <a href="index.html#awards">Program Awards</a>
-      <a href="index.html#curriculum">Curriculum</a>
+      <a href="index.html#support">Student Support</a>
+      <a href="index.html#research">Research Cohort</a>
       <a href="apply.html">Apply</a>
       <a href="mailto:info@riqe.org">Contact</a>
-      <a href="donate.html" class="btn-donate">Donate</a>
+      <a href="apply.html" class="btn-donate">Apply Now</a>
     </div>
   </nav>
 
@@ -205,7 +159,7 @@
       <h1>Privacy Policy</h1>
       <p class="updated">Last updated: November 2025</p>
 
-      <p>This Privacy Policy explains how the Rindler Institute of Quantitative Education (“RIQE”, “we”, “us”) collects, uses, and protects information when you use this website or interact with our program.</p>
+      <p>This Privacy Policy explains how the Rindler Institute of Quantitative Education (“RIQE”, “we”, “us”) collects, uses, and protects information when you use this website or interact with our research cohort.</p>
 
       <h2>1. Information We Collect</h2>
       <ul>
@@ -218,11 +172,11 @@
       <ul>
         <li>To review and evaluate applications for cohorts.</li>
         <li>To communicate with applicants and participants.</li>
-        <li>To improve our website and curriculum.</li>
+        <li>To improve our website and research cohort experience.</li>
       </ul>
 
       <h2>3. Data Retention</h2>
-      <p>We retain personal information only as long as needed for program-related purposes. We do not sell your personal information. We retain application records for alumni outreach unless requested otherwise.</p>
+      <p>We retain personal information only as long as needed for cohort-related purposes. We do not sell your personal information. We retain application records for alumni outreach unless requested otherwise.</p>
 
       <h2>4. Contact</h2>
       <p>Questions? Contact us at <a href="mailto:info@riqe.org" style="color:var(--amber); font-weight:600;">info@riqe.org</a>.</p>
@@ -238,7 +192,7 @@
       <a href="privpolicy.html">Privacy Policy</a>
     </div>
     <p style="font-size: 0.75rem; opacity: 0.6; max-width: 600px; margin: 20px auto 0;">
-      © 2025 RIQE. All rights reserved.
+      RIQE is a 501(c)(3) nonprofit organization. © 2025 RIQE. All rights reserved.
     </p>
   </footer>
 

@@ -13,59 +13,13 @@
   <meta charset="UTF-8" />
   <title>RIQE – The Rindler Institute of Quantitative Education</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="RIQE is a nonprofit quantitative lab for undergraduates, offering research and intensive training in quant finance." />
+  <meta name="description" content="RIQE is a 501(c)(3) nonprofit research cohort for undergraduates applying current quantitative market research." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
-    .float-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: var(--amber); /* Uses your site's amber #bc6c25 */
-    color: white !important; /* Forces white text */
-    padding: 16px 30px;
-    border-radius: 50px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 9999;
-    box-shadow: 0 4px 15px rgba(188, 108, 37, 0.4);
-    border: 2px solid white; /* Adds a clean pop against the background */
-    transition: all 0.3s ease;
-    animation: pulse-glow 2s infinite;
-  }
-
-  .float-btn:hover {
-    transform: translateY(-5px);
-    background-color: #a65d20; /* Slightly darker on hover */
-    box-shadow: 0 8px 25px rgba(188, 108, 37, 0.6);
-  }
-
-  /* Pulse Animation to make it "stick out" */
-  @keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 rgba(188, 108, 37, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(188, 108, 37, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(188, 108, 37, 0); }
-  }
-
-  /* Mobile Adjustment */
-  @media (max-width: 600px) {
-    .float-btn {
-      bottom: 20px;
-      right: 20px;
-      padding: 12px 24px;
-      font-size: 0.8rem;
-    }
-  }
     :root {
       /* Refined Palette */
       --green-dark: #283618;
@@ -169,8 +123,8 @@
       position: relative;
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 40px;
+      align-items: flex-start;
+      padding: 120px 40px 40px;
       overflow: hidden;
     }
     
@@ -294,7 +248,7 @@
     .section-head { margin-bottom: 40px; max-width: 700px; }
     .section-head h2 { font-size: 2rem; margin-bottom: 15px; }
 
-    /* Cards for Awards & Curriculum */
+    /* Cards for Student Support & Research Cohort */
     .grid-3 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -312,7 +266,7 @@
     .info-card h3 { font-family: 'Inter', sans-serif; font-size: 1.1rem; margin-bottom: 10px; color: var(--green-dark); }
     .info-card p { font-size: 0.95rem; color: #555; }
 
-    /* Curriculum Timeline */
+    /* Research Rhythm */
     .timeline-box {
       margin-top: 40px;
       background: var(--green-dark);
@@ -382,8 +336,8 @@
 
     <div class="desktop-nav">
       <a href="#about">About</a>
-      <a href="#awards">Program Awards</a>
-      <a href="#curriculum">Curriculum</a>
+      <a href="#support">Student Support</a>
+      <a href="#research">Research Cohort</a>
       <a href="mailto:info@riqe.org">Contact</a>
       <a href="apply.html" class="btn-donate">Apply Now</a>
     </div>
@@ -395,7 +349,7 @@
       <div class="hero-card fade-in">
         <span class="hero-brand">The Rindler Institute</span>
         <h1 class="hero-title">Quantitative Education for the Next Generation.</h1>
-        <p class="hero-text">A nonprofit lab dedicated to breaking barriers in quantitative finance, mathematics, and computation through rigorous research.</p>
+        <p class="hero-text">A 501(c)(3) nonprofit research cohort dedicated to quantitative finance, mathematics, and computation.</p>
         <div class="hero-buttons">
           <a href="apply.html" class="btn-main">Apply</a>
           <a href="mailto:info@riqe.org" class="btn-outline">Contact</a>
@@ -406,24 +360,25 @@
     <section class="hero-content" id="about">
       <div class="content-block fade-in delay-1">
         <div class="section-label">About RIQE</div>
-        <p>The Rindler Institute of Quantitative Education (RIQE) is a selective, focused nonprofit. We help students break into high-level quant finance and applied math.</p>
-        <p>We operate like a real research lab. Our goal is to assemble a small, highly motivated team of analysts to develop and rigorously backtest trading strategies using paper-traded portfolios.</p>
+        <p>The Rindler Institute of Quantitative Education (RIQE) is a selective 501(c)(3) nonprofit. We help students learn quantitative finance and applied math by doing research, not just completing coursework.</p>
+        <p>We operate as a small research cohort that reads current literature on quantitative market research, reproduces useful methods, and tests ideas through careful data work and paper-traded portfolios.</p>
       </div>
 
       <div class="content-block fade-in delay-1">
-        <div class="section-label">Funding & Growth</div>
-        <p>We have received <strong>$5,000</strong> in funding and are projected to receive another <strong>$3,500</strong> to further our mission.</p>
-        <a href="donate.html" class="btn-outline" style="margin-top: 15px; display: inline-block;">Donate to RIQE</a>
+        <div class="section-label">501(c)(3) Nonprofit</div>
+        <p>RIQE is now a 501(c)(3) nonprofit organization. We have received <strong>$5,000</strong> in funding and are projected to receive another <strong>$3,500</strong> to further our mission.</p>
+        <p>Funding expands access to data, compute, research materials, and student support for the cohort.</p>
+        <a href="mailto:info@riqe.org?subject=Supporting%20RIQE" class="btn-outline" style="margin-top: 15px; display: inline-block;">Contact About Support</a>
       </div>
 
       <div class="content-block fade-in delay-2">
         <div class="section-label">Why Join?</div>
-        <p>RIQE is designed to mirror the structure of a professional quant firm.</p>
+        <p>RIQE is designed to feel like a focused research group: students read, question, implement, and present work together.</p>
         
         <div class="benefits-grid">
           <div class="benefit-item">
-            <h4>Real Experience</h4>
-            <p>Build models, clean data, and test strategies in a realistic research environment.</p>
+            <h4>Research Practice</h4>
+            <p>Read current papers, translate ideas into code, clean data, and test strategies in a realistic research environment.</p>
           </div>
           <div class="benefit-item">
             <h4>Scholarship Support</h4>
@@ -431,11 +386,11 @@
           </div>
           <div class="benefit-item">
             <h4>Portfolio Building</h4>
-            <p>Create code repositories and research papers to present for internships and grad school.</p>
+            <p>Create code repositories, research notes, and presentations that show how you think through market questions.</p>
           </div>
           <div class="benefit-item">
             <h4>Mentorship</h4>
-            <p>Structured networking with peers and guest speakers from the industry.</p>
+            <p>Collaborate with peers and guest speakers while shaping projects around the cohort's strongest research questions.</p>
           </div>
         </div>
       </div>
@@ -443,10 +398,10 @@
 
   </div>
 
-  <section id="awards" class="std-section bg-light">
+  <section id="support" class="std-section bg-light">
     <div class="std-section"> <div class="section-head">
-        <h2>Program Awards & Support</h2>
-        <p>We aim to remove financial barriers. A portion of our funding is reserved specifically for student support.</p>
+        <h2>Student Support & Research Infrastructure</h2>
+        <p>We aim to remove financial barriers while giving students access to the materials needed for serious quantitative research.</p>
       </div>
 
       <div class="grid-3">
@@ -455,44 +410,44 @@
           <p>Merit-based stipends awarded to participants in recognition of exceptional performance on RIQE projects, research, and presentations.</p>
         </div>
         <div class="info-card">
-          <h3>Data & Resources</h3>
-          <p>Funding to cover access to premium data sets, compute credits, or specialized tools needed for strategy development.</p>
+          <h3>Data & Compute</h3>
+          <p>Funding to cover access to premium data sets, compute credits, papers, or specialized tools needed for quantitative market research.</p>
         </div>
         <div class="info-card">
-          <h3>Conference Support</h3>
+          <h3>Research Presentation Support</h3>
           <p>Support for students presenting their work at meetups, competitions, or academic events aligned with our mission.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="curriculum" class="std-section">
+  <section id="research" class="std-section">
     <div class="section-head">
-      <h2>Curriculum & Timeline</h2>
-      <p>A rigorous summer term built around three pillars: foundations, strategy development, and capstone research.</p>
+      <h2>Research Cohort Model</h2>
+      <p>RIQE is not a rigid course sequence. Each cohort works from current literature in quantitative market research and builds a shared research agenda around promising questions.</p>
     </div>
 
     <div class="grid-3">
       <div class="info-card">
-        <h3>1. Foundations (Weeks 1-3)</h3>
-        <p>Build tools and vocabulary: log returns, probability, risk metrics (Sharpe/Sortino), and time-series handling in C++. Implement benchmark strategies.</p>
+        <h3>Literature-Driven Starts</h3>
+        <p>We begin from papers, working notes, and market research topics the cohort can implement. Students build the vocabulary and tools needed for the questions in front of them.</p>
       </div>
       <div class="info-card">
-        <h3>2. Strategies (Weeks 4-6)</h3>
-        <p>Trend-following, mean-reversion, and pairs concepts. Work in small groups to prototype paper-traded strategies and interpret backtests critically.</p>
+        <h3>Implementation & Testing</h3>
+        <p>Students reproduce and adapt methods, prototype paper-traded strategies, and evaluate backtests critically instead of treating models as black boxes.</p>
       </div>
       <div class="info-card">
-        <h3>3. Capstone (Weeks 7-10)</h3>
-        <p>Propose, build, and refine a research project. Concludes with a written report and a presentation of findings and code.</p>
+        <h3>Research Output</h3>
+        <p>Cohort work moves toward written notes, code, presentations, and project artifacts that explain the question, method, data, and limitations.</p>
       </div>
     </div>
 
     <div class="timeline-box">
-      <h3>Timeline at a Glance</h3>
+      <h3>Working Rhythm</h3>
       <ul>
-        <li><b>Pre-program:</b> Optional C++ and math refreshers (2-3 weeks prior).</li>
-        <li><b>Program weeks:</b> 1-2 live remote sessions/week + 10-15 hours independent work.</li>
-        <li><b>Final week:</b> Project presentations and publication to RIQE repository.</li>
+        <li><b>Before the cohort:</b> Optional math, coding, and market microstructure refreshers are shared as needed.</li>
+        <li><b>During the cohort:</b> Members meet regularly for paper discussion, implementation reviews, and research direction.</li>
+        <li><b>Final phase:</b> Projects are refined into presentations, reports, or repository-ready research artifacts.</li>
       </ul>
     </div>
   </section>
@@ -503,11 +458,12 @@
     </div>
     <div class="footer-links">
       <a href="mailto:info@riqe.org">Contact</a>
+      <a href="donate.html">Support</a>
       <a href="privpolicy.html">Privacy Policy</a>
       <a href="https://github.com/" target="_blank">GitHub</a>
     </div>
     <p style="font-size: 0.75rem; opacity: 0.6; max-width: 600px; margin: 0 auto;">
-      This site and program are for educational purposes only and do not constitute financial advice or a solicitation to trade securities. © 2025 RIQE.
+      RIQE is a 501(c)(3) nonprofit organization. This site and cohort are for educational purposes only and do not constitute financial advice or a solicitation to trade securities. © 2025 RIQE.
     </p>
   </footer>
 

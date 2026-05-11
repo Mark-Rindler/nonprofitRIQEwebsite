@@ -15,7 +15,7 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Donate page -->
+  <!-- Support page -->
   <url>
     <loc>https://riqe.org/donate</loc>
     <changefreq>weekly</changefreq>
@@ -27,13 +27,6 @@
     <loc>https://riqe.org/privpolicy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-
-  <!-- Under-construction portal (optional – delete this block if you don't want it indexed) -->
-  <url>
-    <loc>https://riqe.org/underconstruction</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
 
 </urlset>

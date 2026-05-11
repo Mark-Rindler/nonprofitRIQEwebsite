@@ -11,60 +11,15 @@
   </script>
 
   <meta charset="UTF-8" />
-  <title>RIQE – Donate (Portal Under Construction)</title>
+  <title>Support RIQE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
-    .float-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: var(--amber); /* Uses your site's amber #bc6c25 */
-    color: white !important; /* Forces white text */
-    padding: 16px 30px;
-    border-radius: 50px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 9999;
-    box-shadow: 0 4px 15px rgba(188, 108, 37, 0.4);
-    border: 2px solid white; /* Adds a clean pop against the background */
-    transition: all 0.3s ease;
-    animation: pulse-glow 2s infinite;
-  }
-
-  .float-btn:hover {
-    transform: translateY(-5px);
-    background-color: #a65d20; /* Slightly darker on hover */
-    box-shadow: 0 8px 25px rgba(188, 108, 37, 0.6);
-  }
-
-  /* Pulse Animation to make it "stick out" */
-  @keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 rgba(188, 108, 37, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(188, 108, 37, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(188, 108, 37, 0); }
-  }
-
-  /* Mobile Adjustment */
-  @media (max-width: 600px) {
-    .float-btn {
-      bottom: 20px;
-      right: 20px;
-      padding: 12px 24px;
-      font-size: 0.8rem;
-    }
-  }
     :root {
       --green-dark: #283618;
       --green-mid: #606c38;
@@ -131,7 +86,7 @@
 
     h1 { font-size: 2rem; margin-bottom: 20px; }
     
-    /* Highlight Box for Zelle */
+    /* Highlight Box for interim giving */
     .highlight-box {
       background: #fdfdf8;
       border-left: 4px solid var(--amber);
@@ -171,33 +126,33 @@
   <nav class="top-bar">
     <a href="index.html" class="logo-area">RIQE</a>
     <div class="nav-links">
-      <a href="donate.html">← Back to Donate</a>
+      <a href="donate.html">← Back to Support</a>
     </div>
   </nav>
 
   <main class="uc-page">
     <section class="uc-card">
-      <span class="badge">Portal Under Construction</span>
-      <h1>Temporary Donation Method</h1>
-      <p>Until RIQE is formally set up as a tax-exempt nonprofit, we do not have a hosted credit card portal. In the meantime, we are accepting contributions via Zelle to cover early operating costs (data, compute, etc.).</p>
+      <span class="badge">Support RIQE</span>
+      <h1>Giving Instructions</h1>
+      <p>RIQE is a 501(c)(3) nonprofit organization. For contribution instructions, partnership questions, or receipt details, contact us directly.</p>
 
       <div class="highlight-box">
-        <div style="font-size: 0.9rem; text-transform: uppercase; color: #888;">Zelle Contributions To:</div>
-        <div class="zelle-number">+1 (817) 996-4648</div>
+        <div style="font-size: 0.9rem; text-transform: uppercase; color: #888;">Contact:</div>
+        <div class="zelle-number">info@riqe.org</div>
         <p style="font-size: 0.9rem; color: #666;">
-          <em>Note: Contributions are currently treated as personal gifts/payments and are not tax-deductible.</em>
+          <em>Please email us before sending a contribution so we can provide the current instructions and receipt details.</em>
         </p>
-        <a href="tel:+18179964648" class="btn">Tap to Call / Verify</a>
+        <a href="mailto:info@riqe.org?subject=Supporting%20RIQE" class="btn">Email RIQE</a>
       </div>
 
       <p style="font-size: 0.9rem; color: #555;">
-        As soon as our 501(c)(3) status is finalized, this page will be replaced by a secure Stripe donation form.
+        Online giving is being finalized. Contributions may be tax-deductible as permitted by law.
       </p>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Rindler Institute of Quantitative Education.</p>
+    <p>RIQE is a 501(c)(3) nonprofit organization. © 2025 Rindler Institute of Quantitative Education.</p>
   </footer>
 
 </body>
