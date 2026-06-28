@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8NGQXW18FD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8NGQXW18FD');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Math Research Paper Template | RIQE</title>
+  <link rel="canonical" href="https://riqe.org/math-research-paper-template" />
+  <meta name="description" content="Template for a RIQE math research paper page." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green-dark: #283618;
+      --green-mid: #606c38;
+      --cream: #fefae0;
+      --cream-dim: #f2ebd4;
+      --gold: #dda15e;
+      --amber: #bc6c25;
+      --header-height: 70px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--cream);
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--green-dark);
+    }
+
+    a { text-decoration: none; color: inherit; transition: all 0.2s; }
+
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      height: var(--header-height);
+      background: rgba(254, 250, 224, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(40, 54, 24, 0.1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+    }
+
+    .logo-area {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      font-family: 'Libre Baskerville', serif;
+    }
+
+    .desktop-nav { display: flex; gap: 24px; align-items: center; }
+    .desktop-nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--green-dark);
+    }
+    .desktop-nav a:hover,
+    .desktop-nav a.active { color: var(--amber); }
+
+    .btn-donate {
+      background: var(--green-dark);
+      color: var(--cream) !important;
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .btn-donate:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .bar { width: 25px; height: 2px; background: var(--green-dark); transition: 0.3s; }
+
+    .page-wrapper {
+      padding: 120px 5% 80px;
+      max-width: 1080px;
+      margin: 0 auto;
+      min-height: calc(100vh - 180px);
+    }
+
+    .entry-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .entry-tab {
+      background: #fff;
+      border: 1px solid rgba(40, 54, 24, 0.1);
+      border-radius: 6px;
+      color: var(--green-dark);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 10px 14px;
+    }
+
+    .entry-tab:hover,
+    .entry-tab.active {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    .page-kicker {
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      color: var(--amber);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .page-header {
+      margin-bottom: 30px;
+      max-width: 780px;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .page-header p {
+      color: #555;
+      max-width: 690px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .meta-item {
+      background: #fff;
+      border: 1px solid rgba(40, 54, 24, 0.08);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--amber);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .meta-value { color: #555; font-size: 0.95rem; }
+
+    .paper-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 270px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .paper-main,
+    .paper-side {
+      display: grid;
+      gap: 22px;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid rgba(40, 54, 24, 0.09);
+      border-radius: 8px;
+      padding: 26px;
+    }
+
+    .panel h2 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    .panel h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+    }
+
+    .placeholder {
+      color: #777;
+      border: 1px dashed rgba(40, 54, 24, 0.2);
+      background: rgba(242, 235, 212, 0.45);
+      border-radius: 6px;
+      padding: 16px;
+      min-height: 76px;
+    }
+
+    .paper-section-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .math-block {
+      background: var(--cream);
+      border: 1px dashed rgba(40, 54, 24, 0.22);
+      border-radius: 8px;
+      padding: 18px;
+      color: #555;
+      min-height: 110px;
+    }
+
+    pre {
+      background: #1f2718;
+      color: #fefae0;
+      border-radius: 8px;
+      overflow-x: auto;
+      padding: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.55;
+    }
+
+    code { font-family: 'JetBrains Mono', monospace; }
+
+    .link-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .link-list a,
+    .link-list span {
+      background: var(--cream);
+      border: 1px solid rgba(40, 54, 24, 0.08);
+      border-radius: 6px;
+      color: #555;
+      padding: 12px;
+      font-size: 0.92rem;
+    }
+
+    footer {
+      background: var(--green-dark);
+      color: var(--cream);
+      padding: 50px 5%;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .footer-links { margin: 20px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { color: var(--gold); }
+
+    @media (max-width: 900px) {
+      .menu-toggle { display: flex; }
+      .desktop-nav {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background: var(--cream);
+        flex-direction: column;
+        padding: 20px;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        display: none;
+      }
+      .desktop-nav.active { display: flex; }
+      .page-wrapper { padding: 110px 20px 60px; }
+      .paper-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+  <link rel="stylesheet" href="site-polish.css" />
+</head>
+
+<body>
+  <nav class="top-bar">
+    <a href="index.html" class="logo-area">RIQE</a>
+    <button class="menu-toggle" aria-label="Toggle Menu">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </button>
+
+    <div class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="past-research.html" class="active">Research</a>
+      <a href="past-works.html">Past Works</a>
+      <a href="mailto:info@riqe.org">Contact</a>
+      <a href="apply.html" class="btn-donate">Apply</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+    <nav class="entry-tabs" aria-label="Past research navigation">
+      <a href="past-research.html" class="entry-tab">Past Research</a>
+      <a href="math-research-paper-template.html" class="entry-tab active">Math Research Paper</a>
+    </nav>
+
+    <div class="page-header">
+      <div class="page-kicker">Past Research / Paper Template</div>
+      <h1>Math Research Paper Template</h1>
+      <p>Internal drafting layout for research entries with abstracts, LaTeX-rendered results, proof notes, references, and downloadable files.</p>
+    </div>
+
+    <section class="meta-grid" aria-label="Paper metadata placeholders">
+      <div class="meta-item">
+        <span class="meta-label">Status</span>
+        <span class="meta-value">Internal draft</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Authors</span>
+        <span class="meta-value">To be added</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Topic</span>
+        <span class="meta-value">To be added</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Last Updated</span>
+        <span class="meta-value">To be added</span>
+      </div>
+    </section>
+
+    <div class="paper-layout">
+      <div class="paper-main">
+        <section class="panel">
+          <h2>Abstract</h2>
+          <div class="placeholder">Paste the paper abstract here.</div>
+        </section>
+
+        <section class="panel">
+          <h2>Main Result</h2>
+          <div class="math-block">
+            \[
+              \text{Theorem statement will render here when LaTeX is added.}
+            \]
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Paper Body</h2>
+          <div class="paper-section-list">
+            <div>
+              <h3>Introduction</h3>
+              <div class="placeholder">Add motivation, prior work, definitions, and research context.</div>
+            </div>
+            <div>
+              <h3>Definitions and Setup</h3>
+              <div class="placeholder">Add notation, assumptions, examples, and required background.</div>
+            </div>
+            <div>
+              <h3>Results and Proofs</h3>
+              <div class="placeholder">Add theorem statements, lemmas, proof sketches, or full proofs.</div>
+            </div>
+            <div>
+              <h3>Discussion</h3>
+              <div class="placeholder">Add interpretation, open questions, and possible extensions.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>LaTeX Source</h2>
+          <pre><code>% Paste selected LaTeX here.
+% Full paper source can also be linked in the downloads panel.
+
+\section{Placeholder}
+This page is ready for LaTeX-rendered math such as \(a^2 + b^2 = c^2\).</code></pre>
+        </section>
+      </div>
+
+      <aside class="paper-side">
+        <section class="panel">
+          <h2>Downloads</h2>
+          <div class="link-list">
+            <span>PDF link to be added</span>
+            <span>LaTeX source link to be added</span>
+            <span>Supplement link to be added</span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>References</h2>
+          <div class="placeholder">Add citations, bibliography notes, or links to related papers.</div>
+        </section>
+
+        <section class="panel">
+          <h2>Review Notes</h2>
+          <div class="placeholder">Add reviewer comments, revision notes, and publication status.</div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div style="opacity: 0.8; margin-bottom: 20px;">
+      <strong>Rindler Institute of Quantitative Education</strong>
+    </div>
+    <div class="footer-links">
+      <a href="past-research.html">Past Research</a>
+      <a href="mailto:info@riqe.org">Contact</a>
+      <a href="privpolicy.html">Privacy Policy</a>
+    </div>
+    <p style="font-size: 0.75rem; opacity: 0.6; max-width: 600px; margin: 0 auto;">
+      RIQE is a 501(c)(3) nonprofit organization. Internal drafting page.
+    </p>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.desktop-nav');
+
+    const setMenu = (isOpen) => {
+      nav.classList.toggle('active', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    };
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.addEventListener('click', () => setMenu(!nav.classList.contains('active')));
+    document.querySelectorAll('.desktop-nav a').forEach(link => {
+      link.addEventListener('click', () => setMenu(false));
+    });
+  </script>
+</body>
+</html>

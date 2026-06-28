@@ -131,6 +131,7 @@
       padding: 50px 5%; text-align: center; margin-top: 60px;
     }
   </style>
+  <link rel="stylesheet" href="site-polish.css" />
 </head>
 <body>
 
@@ -141,8 +142,10 @@
     </button>
     <div class="desktop-nav">
       <a href="index.html">Home</a>
-      <a href="apply.html">Apply</a>
+      <a href="past-research.html">Research</a>
+      <a href="past-works.html">Past Works</a>
       <a href="mailto:info@riqe.org">Contact</a>
+      <a href="apply.html" class="btn-donate">Apply</a>
     </div>
   </nav>
 
@@ -184,14 +187,22 @@
   </main>
 
   <footer>
-    <p>RIQE is a 501(c)(3) nonprofit organization. © 2025 RIQE. All rights reserved.</p>
+    <p>RIQE is a 501(c)(3) nonprofit organization. &copy; 2026 RIQE. All rights reserved.</p>
   </footer>
 
 
   <script>
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.desktop-nav');
-    toggle.addEventListener('click', () => nav.classList.toggle('active'));
+    const setMenu = (isOpen) => {
+      nav.classList.toggle('active', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    };
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.addEventListener('click', () => setMenu(!nav.classList.contains('active')));
+    document.querySelectorAll('.desktop-nav a').forEach(link => {
+      link.addEventListener('click', () => setMenu(false));
+    });
   </script>
 </body>
 

@@ -1,0 +1,590 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{microtype}
+
+\raggedbottom
+\allowdisplaybreaks[2]
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt}
+\setlist{topsep=3pt,itemsep=2pt,parsep=0pt,partopsep=0pt}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newtheoremstyle{tightplain}{6pt}{6pt}{\itshape}{}{\bfseries}{.}{.5em}{}
+\newtheoremstyle{tightdef}{6pt}{6pt}{}{}{\bfseries}{.}{.5em}{}
+\theoremstyle{tightplain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{openstep}[theorem]{Deferred step}
+\theoremstyle{tightdef}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\KL}{KL}
+
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\R}{\mathbb R}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\F}{\mathrm F}
+\newcommand{\Shat}{\widehat\Sigma}
+\newcommand{\Phat}{\widehat P}
+\newcommand{\Sbar}{\bar\Sigma}
+\newcommand{\dsub}{\mathfrak d_{\mathrm{sub}}}
+\newcommand{\Gcal}{\mathcal G}
+\newcommand{\Ecal}{\mathcal E}
+\newcommand{\Hcal}{\mathcal H}
+
+\title{Adjacent-Window Fluctuations of\\
+Rolling-Covariance Spectral Projectors\\
+under a Static Gaussian Null}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study how the rank-$r$ spectral projector of a rolling-window sample covariance
+matrix changes between two consecutive, overlapping windows when the data are
+i.i.d.\ Gaussian. The two windows share all but one observation each, so the
+covariance difference has rank two; we quantify the resulting squared projector
+increment $\E\norm{\Phat_t-\Phat_{t-1}}_F^2$ and show it scales as $r/W^2$, with an
+explicit constant. The self-contained core proved here consists of a conditional
+exchangeability identity for the two projectors given the shared observations, an
+exact conditional sign-randomization principle (which yields a finite-sample test for
+oriented contrasts), exact Gaussian formulas for the linearized projector variance
+both for a fixed population and conditionally around the random overlap covariance,
+and the algebra giving the $r/W^2$ rate. The perturbation, concentration,
+$\chi^2$-tail, and Gaussian-chaos facts used along the way are standard and are cited
+at the point of use rather than restated; with those citations in place the $r/W^2$
+rate (Theorem~\ref{thm:conditionalbenchmark}) holds outright. Only two items are
+specific to this work and remain to be written: a Lipschitz-continuity step for the
+conditional variance coefficient, needed for the sharp constant
+(Theorem~\ref{thm:conditionalconstant}), and the local-geometry details of a matching
+minimax lower bound.
+\end{abstract}
+
+\section{Conventions on proof status}
+
+We use two labels. A \emph{Proposition}, \emph{Lemma}, \emph{Corollary}, or
+\emph{Theorem} is proved here in full from elementary conditioning, Gaussian moment
+identities, linear algebra, and standard results cited inline where they are used. A
+\emph{Deferred step} is specific to this work and is presently only sketched; these
+are the items a final version still has to write out.
+
+The results proved here are: the rank-two structure and conditional exchangeability
+(\S\ref{sec:exch}); exact conditional sign randomization and the resulting
+finite-sample test (\S\ref{sec:sign}); the exact fixed-population linearized variance
+(\S\ref{sec:fixedpop}); the exact conditional linearized variance around the random
+overlap covariance, the overlap-separation lemma, and the order-$r$ control of the
+variance coefficient (\S\ref{sec:condvar}); and the $r/W^2$ rate together with the
+conditional constant-level expansion (\S\ref{sec:rate}). Standard perturbation,
+covariance-concentration, $\chi^2$-tail, and Gaussian-chaos facts are invoked by
+citation where needed and are not restated as separate claims. After this accounting,
+the rate in Theorem~\ref{thm:conditionalbenchmark} is unconditional; the sharp
+constant in Theorem~\ref{thm:conditionalconstant} rests on a single continuity step
+(\S\ref{sec:deferred}, Deferred step~\ref{def:corederivative}), and the matching lower
+bound on a second (Deferred step~\ref{def:rollinglower}).
+
+\section{Setup and assumptions}
+
+For a window width $W$ let $I_t=\{t-W+1,\ldots,t\}$ and define the rolling sample
+covariance
+\[
+\widehat\Sigma_t=\frac1W\sum_{s\in I_t}r_s r_s^\top .
+\]
+For a symmetric matrix $A$ whose $r$-th and $(r+1)$-st eigenvalues differ, let $P(A)$
+be its top-$r$ spectral projector; on the measure-zero set of eigenvalue ties we fix
+an arbitrary measurable tie-breaking rule. Write $\Phat_t=P(\widehat\Sigma_t)$.
+
+\begin{assumption}[Static Gaussian null]\label{ass:gaussian}
+On $I_t\cup I_{t-1}$ the vectors $r_s$ are independent and identically distributed
+$N(0,\Sigma)$.
+\end{assumption}
+
+\begin{assumption}[Bulk-plus-spikes spectrum]\label{ass:bulkspike}
+The rank $r$ is fixed. With eigenvalues ordered as
+$\lambda_1(\Sigma)\ge\cdots\ge\lambda_n(\Sigma)$, there are constants
+$0<m<M<\infty$ and $0<c_\lambda\le C_\lambda<\infty$, independent of $n$ and $W$,
+with
+\[
+m\le \lambda_n(\Sigma)\le\cdots\le\lambda_{r+1}(\Sigma)\le M,
+\qquad
+c_\lambda n\le \lambda_r(\Sigma)\le\cdots\le\lambda_1(\Sigma)\le C_\lambda n .
+\]
+\end{assumption}
+
+\begin{assumption}[Eigengap]\label{ass:gap}
+The gap $\delta=\lambda_r(\Sigma)-\lambda_{r+1}(\Sigma)$ satisfies $\delta\ge c_\delta n$
+for a constant $c_\delta>0$.
+\end{assumption}
+
+\begin{assumption}[Asymptotic regime]\label{ass:asymptotic}
+The rank $r$ is fixed, $n$ may grow, and $W=W_n\to\infty$. Wherever exponential
+sample-covariance concentration is invoked we assume $W\ge C\log n$ and $W\ge W_0$,
+with constants depending only on the spectral constants above and on $r$.
+\end{assumption}
+
+For a Hilbert-space-valued square-integrable random variable $X$ and a
+sub-$\sigma$-algebra $\Gcal$, write the conditional variance
+\[
+V_F(X\mid\Gcal)=\E\bigl[\norm{X-\E[X\mid\Gcal]}_F^2\bigm|\Gcal\bigr].
+\]
+
+\begin{lemma}[Conditional i.i.d.\ variance identity]\label{lem:iidvar}
+If $X_1,X_2$ are conditionally i.i.d.\ and square-integrable given $\Gcal$, then
+\[
+\E\bigl[\norm{X_1-X_2}_F^2\bigm|\Gcal\bigr]=2\,V_F(X_1\mid\Gcal).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\mu=\E[X_1\mid\Gcal]=\E[X_2\mid\Gcal]$. Conditional independence gives
+$\E[\langle X_1-\mu,X_2-\mu\rangle\mid\Gcal]=0$, so
+$\E[\norm{X_1-X_2}_F^2\mid\Gcal]=\E[\norm{X_1-\mu}_F^2\mid\Gcal]
++\E[\norm{X_2-\mu}_F^2\mid\Gcal]=2V_F(X_1\mid\Gcal)$.
+\end{proof}
+
+\section{Results proved here}
+
+\subsection{Rank-two structure and conditional exchangeability}\label{sec:exch}
+
+For adjacent windows,
+\[
+\widehat\Sigma_t-\widehat\Sigma_{t-1}
+=\frac1W\bigl(r_t r_t^\top-r_{t-W}r_{t-W}^\top\bigr),
+\]
+so the covariance difference has rank at most two: the windows differ only through
+the \emph{entering} observation $r_t$ and the \emph{leaving} observation $r_{t-W}$.
+Their common part is the \emph{overlap covariance}
+\[
+C_t:=\frac1W\sum_{s=t-W+1}^{t-1}r_s r_s^\top,
+\qquad
+\alpha_W:=\frac{W-1}{W},
+\]
+which satisfies $\E C_t=\alpha_W\Sigma$ and
+\[
+\widehat\Sigma_t=C_t+\frac1W r_t r_t^\top,
+\qquad
+\widehat\Sigma_{t-1}=C_t+\frac1W r_{t-W}r_{t-W}^\top.
+\]
+Let $\phi_{C_t}(v)$ denote the top-$r$ projector of $C_t+W^{-1}vv^\top$, and set
+$\Gcal_t=\sigma(r_{t-W+1},\ldots,r_{t-1})$.
+
+\begin{proposition}[Conditional exchangeability]\label{prop:exchangeability}
+Under Assumption~\ref{ass:gaussian}, conditional on $\Gcal_t$ the projectors
+\[
+\Phat_t=\phi_{C_t}(r_t),
+\qquad
+\Phat_{t-1}=\phi_{C_t}(r_{t-W})
+\]
+are i.i.d. Consequently
+\[
+\E[\Phat_t-\Phat_{t-1}\mid\Gcal_t]=0,
+\qquad
+\E\norm{\Phat_t-\Phat_{t-1}}_F^2=2\,\E\bigl[V_F(\Phat_t\mid\Gcal_t)\bigr].
+\]
+\end{proposition}
+
+\begin{proof}
+Given $\Gcal_t$ the overlap covariance $C_t$ is deterministic and the two boundary
+observations $r_t,r_{t-W}$ are i.i.d.\ $N(0,\Sigma)$, independent of $C_t$. Hence
+$\Phat_t$ and $\Phat_{t-1}$ are conditionally i.i.d. The mean-zero statement is then
+immediate, and the second-moment statement is Lemma~\ref{lem:iidvar} followed by
+taking expectations.
+\end{proof}
+
+\subsection{Sign randomization and a finite-sample test}\label{sec:sign}
+
+\begin{theorem}[Exact conditional sign randomization]\label{thm:exactrandomization}
+Under Assumption~\ref{ass:gaussian}, let $\mathcal A$ be any measurable
+Hilbert-space-valued functional of two rank-$r$ projectors with
+$\mathcal A(Q_1,Q_2)=-\mathcal A(Q_2,Q_1)$. Then, conditional on $\Gcal_t$,
+\[
+\mathcal A(\Phat_t,\Phat_{t-1})\stackrel{d}=-\mathcal A(\Phat_t,\Phat_{t-1}).
+\]
+This applies to oriented statistics such as $\Phat_t-\Phat_{t-1}$ and its linear
+contrasts. It says nothing about the nonnegative magnitude
+$\norm{\Phat_t-\Phat_{t-1}}_F$, which is an even functional.
+\end{theorem}
+
+\begin{proof}
+Swapping the two conditionally i.i.d.\ boundary observations $r_t$ and $r_{t-W}$
+preserves the conditional law and exchanges the two projectors; antisymmetry of
+$\mathcal A$ then negates the statistic.
+\end{proof}
+
+\begin{corollary}[Finite-sample sign test for oriented contrasts]\label{cor:signtest}
+Under Assumption~\ref{ass:gaussian}, fix a deterministic symmetric matrix $A$ or a
+$\Gcal_t$-measurable symmetric matrix $A_t$, and set
+$T_t=\langle A_t,\Phat_t-\Phat_{t-1}\rangle_F$. Then $T_t\stackrel d=-T_t$
+conditional on $\Gcal_t$. Hence if $\Prob(T_t=0\mid\Gcal_t)=0$ the conditional signs
+of $T_t$ are exactly balanced under the null; in the presence of an atom at zero,
+treating zeros as non-rejections gives a conservative test.
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:exactrandomization} to
+$\mathcal A(Q_1,Q_2)=\langle A_t,Q_1-Q_2\rangle_F$, conditioning on $\Gcal_t$ when
+$A_t$ is random.
+\end{proof}
+
+\subsection{Exact linearized variance: fixed population}\label{sec:fixedpop}
+
+\begin{definition}[Linearized-projector variance coefficient]\label{def:dsub}
+With $\Sigma=\sum_{k=1}^n\lambda_k u_k u_k^\top$, $\lambda_1\ge\cdots\ge\lambda_n$ and
+$\lambda_r>\lambda_{r+1}$, set
+\[
+\dsub(\Sigma,r)=2\sum_{i\le r<j}\frac{\lambda_i\lambda_j}{(\lambda_i-\lambda_j)^2}.
+\]
+\end{definition}
+
+\begin{proposition}[Exact fixed-population linearized variance]\label{prop:dsub}
+Let $P=P(\Sigma)$ and let
+\[
+\mathcal L_\Sigma(E)=
+\sum_{i\le r<j}
+\frac{u_j u_j^\top E\, u_i u_i^\top+u_i u_i^\top E\, u_j u_j^\top}{\lambda_i-\lambda_j}
+\]
+be the first-order projector perturbation. Then
+\[
+\norm{\mathcal L_\Sigma(E)}_F^2
+=2\sum_{i\le r<j}\frac{\abs{u_j^\top E u_i}^2}{(\lambda_i-\lambda_j)^2}.
+\]
+If $\widehat\Sigma=W^{-1}\sum_{s=1}^W r_s r_s^\top$ with i.i.d.\
+$r_s\sim N(0,\Sigma)$, then
+\[
+\E\norm{\mathcal L_\Sigma(\widehat\Sigma-\Sigma)}_F^2=\frac{\dsub(\Sigma,r)}{W}.
+\]
+If $H=W^{-1}(r_+r_+^\top-r_-r_-^\top)$ with $r_+,r_-\stackrel{\mathrm{iid}}\sim N(0,\Sigma)$, then
+\[
+\E\norm{\mathcal L_\Sigma(H)}_F^2=\frac{2\,\dsub(\Sigma,r)}{W^2}.
+\]
+\end{proposition}
+
+\begin{proof}
+The Frobenius identity follows from the orthogonality of the matrix units
+$u_j u_i^\top$ in the reduced-resolvent expression. For Gaussian data and $i\ne j$,
+\[
+\E\abs{u_j^\top(\widehat\Sigma-\Sigma)u_i}^2=\frac{\lambda_i\lambda_j}{W},
+\qquad
+\E\abs{u_j^\top H u_i}^2=\frac{2\lambda_i\lambda_j}{W^2},
+\]
+since $u_i^\top r_s$ and $u_j^\top r_s$ are independent mean-zero Gaussians with
+variances $\lambda_i,\lambda_j$. Summing over $i\le r<j$ gives both claims.
+\end{proof}
+
+\begin{corollary}[Bulk-plus-spikes scale]\label{cor:firstorderscale}
+Under Assumptions~\ref{ass:bulkspike}--\ref{ass:gap}, $\dsub(\Sigma,r)=\Theta(r)$.
+Hence the single-window linearized variance scales as $r/W$ and the adjacent-window
+linearized variance as $r/W^2$.
+\end{corollary}
+
+\begin{proof}
+For $i\le r<j$ one has $\lambda_i\asymp n$, $\lambda_j\asymp 1$, and
+$\lambda_i-\lambda_j\asymp n$, so each summand is $\asymp 1/n$. There are
+$r(n-r)$ summands, giving $\Theta(r)$ for fixed $r$.
+\end{proof}
+
+\subsection{Exact conditional linearized variance: random overlap}\label{sec:condvar}
+
+Write $C_t=\sum_{k=1}^n\widetilde\lambda_k\widetilde u_k\widetilde u_k^\top$ with
+$\widetilde\lambda_1\ge\cdots\ge\widetilde\lambda_n$. On the event
+$\widetilde\lambda_r>\widetilde\lambda_{r+1}$ define $\mathcal L_{C_t}$ as in
+Proposition~\ref{prop:dsub} but with the eigendata of $C_t$, and set
+\[
+a_i=\widetilde u_i^\top\Sigma\widetilde u_i,
+\qquad
+b_j=\widetilde u_j^\top\Sigma\widetilde u_j,
+\qquad
+c_{ij}=\widetilde u_i^\top\Sigma\widetilde u_j .
+\]
+
+\begin{proposition}[Exact conditional linearized variance]\label{prop:conditionallinearized}
+Under Assumption~\ref{ass:gaussian}, on $\widetilde\lambda_r>\widetilde\lambda_{r+1}$,
+with $H_t=W^{-1}(r_t r_t^\top-r_{t-W}r_{t-W}^\top)$,
+\[
+\E\bigl[\norm{\mathcal L_{C_t}(H_t)}_F^2\bigm|\Gcal_t\bigr]
+=\frac4{W^2}\sum_{i\le r<j}\frac{a_i b_j+c_{ij}^2}{(\widetilde\lambda_i-\widetilde\lambda_j)^2}.
+\]
+\end{proposition}
+
+\begin{proof}
+For one boundary term $\Delta=xx^\top/W$ with $x\sim N(0,\Sigma)$,
+\[
+\norm{\mathcal L_{C_t}(\Delta)}_F^2
+=\frac2{W^2}\sum_{i\le r<j}
+\frac{\abs{\widetilde u_j^\top x}^2\abs{\widetilde u_i^\top x}^2}
+{(\widetilde\lambda_i-\widetilde\lambda_j)^2}.
+\]
+With $g_i=\widetilde u_i^\top x$, Isserlis' formula gives
+$\E[g_i^2 g_j^2\mid\Gcal_t]=a_i b_j+2c_{ij}^2$, while
+$\norm{\E[\mathcal L_{C_t}(\Delta)\mid\Gcal_t]}_F^2
+=\tfrac2{W^2}\sum_{i\le r<j}c_{ij}^2/(\widetilde\lambda_i-\widetilde\lambda_j)^2$.
+Subtracting gives the conditional variance of one term; the two terms are
+conditionally i.i.d., so the second moment of their difference is twice that, which
+is the displayed expression.
+\end{proof}
+
+Define the conditional variance coefficient
+\[
+Q(C_t,\Sigma)
+=4\sum_{i\le r<j}\frac{a_i b_j+c_{ij}^2}{(\widetilde\lambda_i-\widetilde\lambda_j)^2},
+\qquad\text{so}\qquad
+\E\bigl[\norm{\mathcal L_{C_t}(H_t)}_F^2\bigm|\Gcal_t\bigr]=\frac{Q(C_t,\Sigma)}{W^2},
+\]
+and the concentration event
+\[
+\Ecal_t=\bigl\{\norm{C_t-\alpha_W\Sigma}_{\op}\le \eta\,\alpha_W n\bigr\},
+\]
+where $\eta>0$ is small relative to $c_\lambda$ and $c_\delta$.
+
+\begin{lemma}[Overlap-covariance separation]\label{inp:coresep}
+Under Assumptions~\ref{ass:gaussian}--\ref{ass:gap}, for $\eta>0$ small there are
+$c,C>0$ with $\Prob(\Ecal_t^c)\le Ce^{-cW}$ whenever $W\ge C\log n$ and $W\ge W_0$.
+\end{lemma}
+
+\begin{proof}
+Write $C_t=\alpha_W S_t$ with $S_t=(W-1)^{-1}\sum_{s=t-W+1}^{t-1}r_s r_s^\top$, the
+sample covariance of $W-1$ i.i.d.\ $N(0,\Sigma)$ vectors. Then
+$\Ecal_t^c=\{\norm{S_t-\Sigma}_{\op}>\eta n\}$, and the bound is the exponential
+operator-norm tail of the Gaussian sample-covariance concentration inequality
+(Koltchinskii and Lounici~\cite{kl}; Vershynin~\cite{vershynin}, Ch.~4--6) applied
+with $N=W-1$ and effective rank $\mathbf r(\Sigma)=O(1)$ under
+Assumption~\ref{ass:bulkspike}.
+\end{proof}
+
+\begin{lemma}[Order-$r$ control of the variance coefficient]\label{lem:sharedcorelinearized}
+Under Assumptions~\ref{ass:gaussian}--\ref{ass:gap}, on $\Ecal_t$, and with $W\ge W_0$
+so that $\alpha_W$ is bounded away from zero,
+\[
+c r\le Q(C_t,\Sigma)\le C r .
+\]
+Consequently, by Lemma~\ref{inp:coresep},
+$\E\bigl[\norm{\mathcal L_{C_t}(H_t)}_F^2\,\one_{\Ecal_t}\bigr]\asymp r/W^2$.
+\end{lemma}
+
+\begin{proof}
+On $\Ecal_t$, Weyl's inequality gives
+$\widetilde\lambda_r-\widetilde\lambda_{r+1}\ge\alpha_W\delta-2\eta\alpha_W n
+\ge\tfrac12\alpha_W\delta\asymp n$, so $\abs{\widetilde\lambda_i-\widetilde\lambda_j}\gtrsim n$
+for $i\le r<j$; together with $0\le\widetilde\lambda_j\le\widetilde\lambda_i\lesssim n$
+the denominators are of order $n^2$.
+
+By Cauchy--Schwarz for the form $\langle\cdot,\cdot\rangle_\Sigma$, $c_{ij}^2\le a_i b_j$,
+so $\sum_{i\le r<j}(a_i b_j+c_{ij}^2)\le 2(\sum_{i\le r}a_i)(\sum_{j>r}b_j)$. Since
+$\Sigma$ has $r$ spikes of size $O(n)$ and bulk trace $O(n)$,
+$\sum_{i\le r}a_i\lesssim rn$ and $\sum_{j>r}b_j\lesssim n$, giving the upper bound.
+
+For the lower bound, on $\Ecal_t$ one has $\widetilde\lambda_i\gtrsim n$ for $i\le r$, and
+since $\widetilde u_i$ is an eigenvector of $C_t$,
+$\alpha_W a_i=\widetilde u_i^\top(\alpha_W\Sigma)\widetilde u_i
+\ge\widetilde\lambda_i-\norm{C_t-\alpha_W\Sigma}_{\op}$, so $a_i\gtrsim n$ for $i\le r$
+after fixing $\eta$ small. By Ky Fan,
+$\sum_{j>r}b_j=\tr((I-P(C_t))\Sigma)\ge\sum_{k=r+1}^n\lambda_k(\Sigma)\gtrsim n$.
+Dropping $c_{ij}^2\ge0$ and bounding denominators by $Cn^2$ yields the lower bound.
+The expectation statement combines this with Lemma~\ref{inp:coresep}.
+\end{proof}
+
+\subsection{Rate and constant}\label{sec:rate}
+
+\begin{theorem}[Adjacent-window rate]\label{thm:conditionalbenchmark}
+Assume Assumptions~\ref{ass:gaussian}--\ref{ass:gap} with $r$ fixed. Then, for
+$W\ge C\log n$ and $W\ge W_0$,
+\[
+c\,\frac r{W^2}\le \E\norm{\Phat_t-\Phat_{t-1}}_F^2\le C\,\frac r{W^2}+Cr e^{-cW}.
+\]
+\end{theorem}
+
+\begin{proof}
+Let $\gamma_t=\widetilde\lambda_r-\widetilde\lambda_{r+1}$ and
+$\Delta_t^+=W^{-1}r_t r_t^\top$, $\Delta_t^-=W^{-1}r_{t-W}r_{t-W}^\top$,
+$H_t=\Delta_t^+-\Delta_t^-$. Throughout we use the second-order perturbation
+expansion of a top-$r$ spectral projector with a gap-controlled quadratic remainder:
+for symmetric $A$ with gap $\gamma=\mu_r-\mu_{r+1}>0$ and
+$\norm E_{\op}\le c_0\gamma$,
+\[
+\norm{P(A+E)-P(A)-\mathcal L_A(E)}_F\le C_r\norm E_{\op}^2/\gamma^2,
+\]
+with $c_0\in(0,1/4]$ and $C_r<\infty$ (Kato~\cite{kato}, Ch.~II; Stewart and
+Sun~\cite{stewartsun}, Ch.~V).
+
+Fix $\rho\in(0,c_0]$ and set
+$\Hcal_t=\Ecal_t\cap\{\norm{\Delta_t^+}_{\op}\vee\norm{\Delta_t^-}_{\op}\le\rho\gamma_t\}$.
+Lemma~\ref{inp:coresep} controls $\Ecal_t^c$, and the boundary norms are controlled by
+a weighted-$\chi^2$ tail: since $\norm{\Delta_t^\pm}_{\op}\le\norm{r_\pm}_2^2/W$ and
+$\E\norm{r_\pm}_2^2=\tr\Sigma\asymp n$, one has
+$\Prob\{\norm{r_\pm}_2^2>\kappa nW\}\le C_\kappa e^{-c_\kappa W}$ for each fixed
+$\kappa>0$ (Laurent and Massart~\cite{laurentmassart}, Lemma~1; equivalently the
+Hanson--Wright inequality, Rudelson and Vershynin~\cite{rudelsonvershynin}). Hence
+$\Prob(\Hcal_t^c)\le Ce^{-cW}$.
+
+On $\Hcal_t$, the projector expansion applied at $C_t$ to each boundary term gives
+$\Phat_t-\Phat_{t-1}=L_t+R_t^\Delta$ with $L_t=\mathcal L_{C_t}(H_t)$,
+$R_t^\Delta=R_t^+-R_t^-$, and $\norm{R_t^\pm}_F\le C_r\norm{\Delta_t^\pm}_{\op}^2/\gamma_t^2$.
+Since $\gamma_t\asymp n$ on $\Hcal_t$, the Gaussian eighth-moment bound yields
+$\E[\norm{R_t^\Delta}_F^2\one_{\Hcal_t}]\le C_r W^{-4}$, while
+Lemma~\ref{lem:sharedcorelinearized} gives $\E[\norm{L_t}_F^2\one_{\Ecal_t}]\asymp r/W^2$.
+Conditionally on $\Gcal_t$, $L_t$ is a degree-two Gaussian chaos, whose $L^4$ and
+$L^2$ norms are equivalent by hypercontractivity (Janson~\cite{janson}, Ch.~5--6);
+with the second moment $\asymp r/W^2$ this gives
+$\E[\norm{L_t}_F^4\mid\Gcal_t]\le Cr^2/W^4$ on $\Ecal_t$, so the loss on
+$\Ecal_t\cap\Hcal_t^c$ is exponentially small and $\E[\norm{L_t}_F^2\one_{\Hcal_t}]\asymp r/W^2$.
+
+For the upper bound use
+$\norm{L_t+R_t^\Delta}_F^2\le 2\norm{L_t}_F^2+2\norm{R_t^\Delta}_F^2$ on $\Hcal_t$ and
+$\norm{\Phat_t-\Phat_{t-1}}_F^2\le 2r$ off $\Hcal_t$. For the lower bound,
+$\norm{L_t+R_t^\Delta}_F^2\ge\norm{L_t}_F^2-2\abs{\langle L_t,R_t^\Delta\rangle}$ and
+Cauchy--Schwarz give a cross term of order $\sqrt r\,W^{-3}=o(r/W^2)$.
+\end{proof}
+
+\begin{theorem}[Constant-level expansion; conditional on Deferred step~\ref{def:corederivative}]\label{thm:conditionalconstant}
+Assume Assumptions~\ref{ass:gaussian}--\ref{ass:gap} with $r$ fixed, $W\to\infty$,
+$W\ge C\log n$. Granting Deferred step~\ref{def:corederivative},
+\[
+\E\norm{\Phat_t-\Phat_{t-1}}_F^2
+=\frac{2}{\alpha_W^2}\frac{\dsub(\Sigma,r)}{W^2}+o(W^{-2})
+=\frac{2\dsub(\Sigma,r)}{W^2}+o(W^{-2}),
+\]
+the last equality because $\alpha_W\to1$ and $\dsub(\Sigma,r)=O(1)$ for fixed $r$.
+\end{theorem}
+
+\begin{proof}
+Use the event $\Hcal_t$ and decomposition $\Phat_t-\Phat_{t-1}=L_t+R_t^\Delta$ of
+Theorem~\ref{thm:conditionalbenchmark}, with
+$\E[\norm{R_t^\Delta}_F^2\one_{\Hcal_t}]\le CW^{-4}$ and $\Prob(\Hcal_t^c)\le Ce^{-cW}$.
+By Proposition~\ref{prop:conditionallinearized},
+$\E[\norm{L_t}_F^2\mid\Gcal_t]=Q(C_t,\Sigma)/W^2$ on the gap event. Deferred
+step~\ref{def:corederivative} with Lemma~\ref{inp:coresep} gives
+$\E\norm{L_t}_F^2=W^{-2}\bigl(2\alpha_W^{-2}\dsub(\Sigma,r)+o(1)\bigr)+O(e^{-cW})$; the
+restriction loss to $\Hcal_t$ is exponentially small by the conditional
+fourth-moment bound (hypercontractivity; Janson~\cite{janson}, Ch.~5--6). Expanding
+$\norm{L_t+R_t^\Delta}_F^2$, the remainder square is $O(W^{-4})$ and the cross term
+$O(W^{-3})$, both $o(W^{-2})$.
+\end{proof}
+
+\begin{remark}[Consistency check on the constant]
+Replacing the random overlap covariance by its mean $C_t=\alpha_W\Sigma$ gives
+$\widetilde u_i=u_i$, $a_i=\lambda_i$, $b_j=\lambda_j$, $c_{ij}=0$, hence
+$Q(\alpha_W\Sigma,\Sigma)=4\sum_{i\le r<j}\lambda_i\lambda_j/(\alpha_W^2(\lambda_i-\lambda_j)^2)
+=2\alpha_W^{-2}\dsub(\Sigma,r)$, matching Theorem~\ref{thm:conditionalconstant}.
+Deferred step~\ref{def:corederivative} is precisely the statement that this
+replacement is asymptotically valid.
+\end{remark}
+
+\section{Deferred steps (specific to this work)}\label{sec:deferred}
+
+These two statements are not off-the-shelf theorems: their ingredients are standard,
+but the assembled quantitative claims are particular to this problem and still have to
+be written out.
+
+\begin{openstep}[Continuity of the variance coefficient]\label{def:corederivative}
+Under Assumptions~\ref{ass:gaussian}--\ref{ass:gap} with $r$ fixed, $W\to\infty$,
+$W\ge C\log n$,
+\[
+\E\left[\abs[\Big]{Q(C_t,\Sigma)-\frac{2}{\alpha_W^2}\dsub(\Sigma,r)}\,\one_{\Ecal_t}\right]
+\le C\,\frac{\E\norm{C_t-\alpha_W\Sigma}_{\op}}{n}=O(W^{-1/2})=o(1).
+\]
+\emph{The load-bearing step.} The claim is that the basis-free map
+$A\mapsto Q(A,\Sigma)=\E\norm{\mathcal L_A(xx^\top-yy^\top)}_F^2$, with
+$x,y\stackrel{\mathrm{iid}}\sim N(0,\Sigma)$, is Lipschitz at $A_0=\alpha_W\Sigma$ with
+modulus $C/n$ on an operator-norm ball of radius $O(n)$. The intended proof combines
+the Riesz-projector representation of $\mathcal L_A$ and the resolvent identity (the
+perturbation machinery of Kato~\cite{kato}, Ch.~II) with fixed-rank bulk-plus-spikes
+moment bounds (Koltchinskii and Lounici~\cite{kl}). This is the one step that should
+be written in full before submission.
+\end{openstep}
+
+\begin{openstep}[Minimax lower bound for the projector increment]\label{def:rollinglower}
+Fix $r$ with $n\ge 2r+1$. There is a Gaussian adjacent-window subclass meeting the
+bulk-plus-spikes and eigengap conditions uniformly such that, with
+$D_t=P(\bar\Sigma_t)-P(\bar\Sigma_{t-1})$,
+\[
+\inf_{\widehat D}\sup\,\E\norm{\widehat D-D_t}_F^2\ge c\,\frac r{W^2}.
+\]
+\emph{Status.} The intended proof uses the local chart
+$U_\Theta=\binom{I_r}{\Theta}(I_r+\Theta^\top\Theta)^{-1/2}$,
+$P_\Theta=U_\Theta U_\Theta^\top$, $\Sigma_\Theta=I_n+nP_\Theta$, with the overlap
+covariance set to $\Sigma_0$ and the two boundary covariances to
+$\Sigma_{\pm\Theta}$. The standard machinery is Assouad's lemma together with the
+Gaussian KL formula (Tsybakov~\cite{tsybakov}, \S2.7); the work specific to this paper
+is the local projector-geometry equivalence, the first-order expansion of
+$D_t(\Theta)$, the exact KL between adjacent hypercube vertices, and the Assouad
+reduction.
+\end{openstep}
+
+\section{Combined statement}
+
+\begin{theorem}[Adjacent-window projector increment]\label{thm:final}
+Assume Assumptions~\ref{ass:gaussian}--\ref{ass:asymptotic}. The rate
+\[
+\E\norm{\Phat_t-\Phat_{t-1}}_F^2\asymp \frac r{W^2}
+\]
+holds unconditionally by Theorem~\ref{thm:conditionalbenchmark}. Granting the single
+continuity step (Deferred step~\ref{def:corederivative}), the sharp constant is
+\[
+\E\norm{\Phat_t-\Phat_{t-1}}_F^2=\frac{2\dsub(\Sigma,r)}{W^2}+o(W^{-2}),
+\qquad \dsub(\Sigma,r)=\Theta(r).
+\]
+\end{theorem}
+
+\begin{remark}
+Under the static null the conditional mean of the increment is zero
+(Proposition~\ref{prop:exchangeability}), so the $r/W^2$ scale is the baseline
+sampling-fluctuation level of consecutive projectors, against which a genuine change
+in the leading subspace must be detected. With the standard results cited inline, the
+rate is settled; the remaining gaps are the constant
+(Deferred step~\ref{def:corederivative}) and the matching lower bound
+(Deferred step~\ref{def:rollinglower}). Distributional and concentration properties of
+the spectral projectors of a single sample covariance, the closest prior object, are
+studied by Koltchinskii and Lounici~\cite{klproj}.
+\end{remark}
+
+\begin{thebibliography}{9}
+
+\bibitem{kato} T.~Kato. \emph{Perturbation Theory for Linear Operators}. Classics in
+Mathematics. Springer, Berlin, 1995. Reprint of the 1980 second edition.
+
+\bibitem{stewartsun} G.~W.~Stewart and J.-G.~Sun. \emph{Matrix Perturbation Theory}.
+Academic Press, Boston, 1990.
+
+\bibitem{kl} V.~Koltchinskii and K.~Lounici. Concentration inequalities and moment
+bounds for sample covariance operators. \emph{Bernoulli}, 23(1):110--133, 2017.
+
+\bibitem{klproj} V.~Koltchinskii and K.~Lounici. Normal approximation and
+concentration of spectral projectors of sample covariance. \emph{Ann.\ Statist.},
+45(1):121--157, 2017.
+
+\bibitem{vershynin} R.~Vershynin. \emph{High-Dimensional Probability: An Introduction
+with Applications in Data Science}. Cambridge Series in Statistical and Probabilistic
+Mathematics. Cambridge University Press, Cambridge, 2018.
+
+\bibitem{laurentmassart} B.~Laurent and P.~Massart. Adaptive estimation of a quadratic
+functional by model selection. \emph{Ann.\ Statist.}, 28(5):1302--1338, 2000.
+
+\bibitem{rudelsonvershynin} M.~Rudelson and R.~Vershynin. Hanson--Wright inequality and
+sub-gaussian concentration. \emph{Electron.\ Commun.\ Probab.}, 18(82):1--9, 2013.
+
+\bibitem{janson} S.~Janson. \emph{Gaussian Hilbert Spaces}. Cambridge Tracts in
+Mathematics 129. Cambridge University Press, Cambridge, 1997.
+
+\bibitem{tsybakov} A.~B.~Tsybakov. \emph{Introduction to Nonparametric Estimation}.
+Springer Series in Statistics. Springer, New York, 2009.
+
+\end{thebibliography}
+
+\end{document}

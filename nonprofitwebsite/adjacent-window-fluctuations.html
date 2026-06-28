@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8NGQXW18FD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8NGQXW18FD');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adjacent-Window Fluctuations | RIQE</title>
+  <link rel="canonical" href="https://riqe.org/adjacent-window-fluctuations" />
+  <meta name="description" content="RIQE proof notes on adjacent-window fluctuations of rolling-covariance spectral projectors." />
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)'], ['$', '$']],
+        displayMath: [['\\[', '\\]'], ['$$', '$$']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --green-dark: #283618;
+      --green-mid: #606c38;
+      --cream: #fefae0;
+      --cream-dim: #f2ebd4;
+      --gold: #dda15e;
+      --amber: #bc6c25;
+      --header-height: 70px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--cream);
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--green-dark);
+    }
+
+    a { text-decoration: none; color: inherit; transition: all 0.2s; }
+
+    .top-bar {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      height: var(--header-height);
+      background: rgba(254, 250, 224, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(40, 54, 24, 0.1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+    }
+
+    .logo-area {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      font-family: 'Libre Baskerville', serif;
+    }
+
+    .desktop-nav { display: flex; gap: 24px; align-items: center; }
+    .desktop-nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--green-dark);
+    }
+    .desktop-nav a:hover,
+    .desktop-nav a.active { color: var(--amber); }
+
+    .btn-donate {
+      background: var(--green-dark);
+      color: var(--cream) !important;
+      padding: 8px 18px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .btn-donate:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .bar { width: 25px; height: 2px; background: var(--green-dark); transition: 0.3s; }
+
+    .page-wrapper {
+      padding: 120px 5% 80px;
+      max-width: 1080px;
+      margin: 0 auto;
+      min-height: calc(100vh - 180px);
+    }
+
+    .entry-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .entry-tab {
+      background: #fff;
+      border: 1px solid rgba(40, 54, 24, 0.1);
+      border-radius: 6px;
+      color: var(--green-dark);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 10px 14px;
+    }
+
+    .entry-tab:hover,
+    .entry-tab.active {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    .page-kicker {
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      color: var(--amber);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .page-header {
+      margin-bottom: 30px;
+      max-width: 820px;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .page-header p {
+      color: #555;
+      max-width: 720px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .meta-item {
+      background: #fff;
+      border: 1px solid rgba(40, 54, 24, 0.08);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--amber);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .meta-value { color: #555; font-size: 0.95rem; }
+
+    .paper-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 270px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .paper-main,
+    .paper-side {
+      display: grid;
+      gap: 22px;
+      min-width: 0;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid rgba(40, 54, 24, 0.09);
+      border-radius: 8px;
+      padding: 26px;
+      min-width: 0;
+    }
+
+    .panel h2 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    .panel h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+    }
+
+    .panel p,
+    .panel li {
+      color: #555;
+      font-size: 0.98rem;
+      overflow-wrap: anywhere;
+    }
+
+    .panel p + p { margin-top: 12px; }
+
+    .paper-section-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .math-block {
+      background: var(--cream);
+      border: 1px dashed rgba(40, 54, 24, 0.22);
+      border-radius: 8px;
+      padding: 18px;
+      color: #555;
+      overflow-x: auto;
+      min-width: 0;
+    }
+
+    ul {
+      margin-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .link-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .link-list a,
+    .link-list span {
+      background: var(--cream);
+      border: 1px solid rgba(40, 54, 24, 0.08);
+      border-radius: 6px;
+      color: #555;
+      padding: 12px;
+      font-size: 0.92rem;
+    }
+
+    .link-list a:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    footer {
+      background: var(--green-dark);
+      color: var(--cream);
+      padding: 50px 5%;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .footer-links { margin: 20px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { color: var(--gold); }
+
+    @media (max-width: 900px) {
+      .menu-toggle { display: flex; }
+      .desktop-nav {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background: var(--cream);
+        flex-direction: column;
+        padding: 20px;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        display: none;
+      }
+      .desktop-nav.active { display: flex; }
+      .page-wrapper { padding: 110px 20px 60px; }
+      .paper-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+  <link rel="stylesheet" href="site-polish.css" />
+</head>
+
+<body>
+  <nav class="top-bar">
+    <a href="index.html" class="logo-area">RIQE</a>
+    <button class="menu-toggle" aria-label="Toggle Menu">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </button>
+
+    <div class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="past-research.html" class="active">Research</a>
+      <a href="past-works.html">Past Works</a>
+      <a href="mailto:info@riqe.org">Contact</a>
+      <a href="apply.html" class="btn-donate">Apply</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+    <nav class="entry-tabs" aria-label="Past research navigation">
+      <a href="past-research.html" class="entry-tab">Past Research</a>
+      <a href="overlap-driven-subspace-drift.html" class="entry-tab">Overlap-Driven Drift</a>
+      <a href="adjacent-window-fluctuations.html" class="entry-tab active">Adjacent-Window Fluctuations</a>
+    </nav>
+
+    <div class="page-header">
+      <div class="page-kicker">Past Research / Incomplete — Open Theorems</div>
+      <h1>Adjacent-Window Fluctuations of Rolling-Covariance Spectral Projectors under a Static Gaussian Null</h1>
+      <p>A proof-status version focused on conditional exchangeability, sign randomization, linearized variance, and the \(r/W^2\) adjacent-window fluctuation rate.</p>
+    </div>
+
+    <section class="meta-grid" aria-label="Paper metadata">
+      <div class="meta-item">
+        <span class="meta-label">Status</span>
+        <span class="meta-value">Incomplete (open theorems)</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Topic</span>
+        <span class="meta-value">Gaussian nulls, projector fluctuations</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Last Updated</span>
+        <span class="meta-value">June 2026</span>
+      </div>
+    </section>
+
+    <div class="paper-layout">
+      <div class="paper-main">
+        <section class="panel">
+          <h2>Abstract</h2>
+          <p>We study how the rank-\(r\) spectral projector of a rolling-window sample covariance matrix changes between two consecutive, overlapping windows when the data are i.i.d. Gaussian. Because the two windows share all but one observation each, the covariance difference has rank two, and the projector increment \(\widehat P_t-\widehat P_{t-1}\) is driven entirely by the entering and exiting boundary observations.</p>
+          <p>These notes quantify the squared projector increment \(\mathbb E\lVert\widehat P_t-\widehat P_{t-1}\rVert_F^2\) and show it scales as \(r/W^2\) with an explicit constant. The self-contained core proved here is: a conditional exchangeability identity for the two projectors given the shared observations; an exact conditional sign-randomization principle (yielding a finite-sample test for oriented contrasts); exact Gaussian formulas for the linearized projector variance, both for a fixed population and conditionally around the random overlap covariance; and the algebra delivering the \(r/W^2\) rate.</p>
+          <p>This is a proof-status document rather than a finished paper. With the standard perturbation, concentration, \(\chi^2\)-tail, and Gaussian-chaos facts cited at point of use, the \(r/W^2\) rate holds outright; two paper-specific steps remain to be written before the sharp constant and matching lower bound are complete.</p>
+        </section>
+
+        <section class="panel">
+          <h2>Main Result</h2>
+          <p>The rate is established unconditionally — the squared increment is pinned between matching multiples of \(r/W^2\) (the exponential term is a negligible eigengap-failure remainder):</p>
+          <div class="math-block">
+            \[
+              c\,\frac r{W^2}
+              \le
+              \mathbb E\lVert \widehat P_t-\widehat P_{t-1}\rVert_F^2
+              \le
+              C\,\frac r{W^2}+Cr e^{-cW}
+            \]
+          </div>
+          <p>Granting the one remaining continuity step for the variance coefficient, the notes identify the asymptotic leading constant used as shorthand in the companion preprint:</p>
+          <div class="math-block">
+            \[
+              \mathbb E\lVert\widehat P_t-\widehat P_{t-1}\rVert_F^2
+              =
+              \frac{2\mathfrak d_{\mathrm{sub}}(\Sigma,r)}{W^2}+o(W^{-2})
+            \]
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Proof Accounting</h2>
+          <div class="paper-section-list">
+            <div>
+              <h3>Proved Core</h3>
+              <p>Full arguments are given for the rank-two structure, conditional exchangeability of the two adjacent projectors, exact conditional sign randomization, the fixed-population linearized variance, the conditional linearized variance around the random overlap covariance (with an overlap-separation lemma and order-\(r\) control of the variance coefficient), and the \(r/W^2\) rate. After this accounting the rate is unconditional.</p>
+            </div>
+            <div>
+              <h3>Deferred Step 1 — Sharp constant</h3>
+              <p>A Lipschitz-continuity step for the conditional variance coefficient: the basis-free map \(A\mapsto Q(A,\Sigma)\) must be shown Lipschitz at \(A_0=\alpha_W\Sigma\) with modulus \(C/n\). The intended proof combines the Riesz-projector / resolvent perturbation machinery (Kato) with bulk-plus-spikes moment bounds (Koltchinskii–Lounici). This is the single load-bearing step gating the sharp constant.</p>
+            </div>
+            <div>
+              <h3>Deferred Step 2 — Matching lower bound</h3>
+              <p>The local-geometry details of a minimax lower bound \(\inf_{\widehat D}\sup\,\mathbb E\lVert\widehat D-D_t\rVert_F^2\ge c\,r/W^2\), via Assouad's lemma with the Gaussian KL formula (Tsybakov) over a local projector chart. The machinery is standard; the projector-geometry expansion and KL computation specific to this problem remain to be written out.</p>
+            </div>
+            <div>
+              <h3>Use Case</h3>
+              <p>The result gives a null sampling-fluctuation benchmark: a threshold for deciding whether observed period-to-period movement in a leading covariance subspace is genuinely larger than the overlap-driven noise floor, or merely sampling chatter.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="paper-side">
+        <section class="panel">
+          <h2>Downloads</h2>
+          <div class="link-list">
+            <a href="research/adjacent-window-fluctuations.pdf" target="_blank" rel="noopener">Full notes (PDF, 8 pp.)</a>
+            <a href="research/adjacent-window-fluctuations.tex" download>LaTeX source</a>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Paper Structure</h2>
+          <ul>
+            <li>Conventions on proof status</li>
+            <li>Setup and assumptions</li>
+            <li>Conditional exchangeability</li>
+            <li>Sign randomization</li>
+            <li>Rate and constant</li>
+            <li>Deferred steps</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h2>Related Entry</h2>
+          <div class="link-list">
+            <a href="overlap-driven-subspace-drift.html">Overlap-Driven Subspace Drift</a>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div style="opacity: 0.8; margin-bottom: 20px;">
+      <strong>Rindler Institute of Quantitative Education</strong>
+    </div>
+    <div class="footer-links">
+      <a href="past-research.html">Past Research</a>
+      <a href="mailto:info@riqe.org">Contact</a>
+      <a href="privpolicy.html">Privacy Policy</a>
+    </div>
+    <p style="font-size: 0.75rem; opacity: 0.6; max-width: 600px; margin: 0 auto;">
+      RIQE is a 501(c)(3) nonprofit organization.
+    </p>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.desktop-nav');
+
+    const setMenu = (isOpen) => {
+      nav.classList.toggle('active', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    };
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.addEventListener('click', () => setMenu(!nav.classList.contains('active')));
+    document.querySelectorAll('.desktop-nav a').forEach(link => {
+      link.addEventListener('click', () => setMenu(false));
+    });
+  </script>
+</body>
+</html>

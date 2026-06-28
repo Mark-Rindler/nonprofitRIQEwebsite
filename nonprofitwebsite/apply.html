@@ -172,6 +172,7 @@
       padding: 40px 5%; text-align: center; margin-top: 40px;
     }
   </style>
+  <link rel="stylesheet" href="site-polish.css" />
 </head>
 
 <body>
@@ -183,9 +184,10 @@
     </button>
     <div class="desktop-nav">
       <a href="index.html">Home</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#research">Research</a>
+      <a href="past-research.html">Research</a>
+      <a href="past-works.html">Past Works</a>
       <a href="mailto:info@riqe.org">Contact</a>
+      <a href="apply.html" class="btn-donate" aria-current="page">Apply</a>
     </div>
   </nav>
 
@@ -216,12 +218,12 @@
         </div>
 
         <div>
-          <label>GitHub Profile *</label>
+          <label>GitHub Profile</label>
           <input type="url" name="github" placeholder="https://github.com/username">
         </div>
 
         <div>
-          <label>LinkedIn Profile *</label>
+          <label>LinkedIn Profile</label>
           <input type="url" name="linkedin">
         </div>
 
@@ -236,7 +238,7 @@
         </div>
 
         <div class="full-width">
-          <label>Resume (PDF) *</label>
+          <label>Resume or CV *</label>
           <div class="file-upload-wrapper">
             <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required style="display:none;">
             <button type="button" class="btn-file" onclick="document.getElementById('resume').click()">Choose File</button>
@@ -261,7 +263,7 @@
   </div>
 
   <footer>
-    <p>RIQE is a 501(c)(3) nonprofit organization. © 2025 RIQE. All rights reserved.</p>
+    <p>RIQE is a 501(c)(3) nonprofit organization. &copy; 2026 RIQE. All rights reserved.</p>
   </footer>
 
 
@@ -269,7 +271,15 @@
     // Navigation Toggle
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.desktop-nav');
-    toggle.addEventListener('click', () => nav.classList.toggle('active'));
+    const setMenu = (isOpen) => {
+      nav.classList.toggle('active', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    };
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.addEventListener('click', () => setMenu(!nav.classList.contains('active')));
+    document.querySelectorAll('.desktop-nav a').forEach(link => {
+      link.addEventListener('click', () => setMenu(false));
+    });
 
     // File Name Display
     const fileInput = document.getElementById('resume');

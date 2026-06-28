@@ -22,18 +22,39 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Past Research page -->
+  <url>
+    <loc>https://riqe.org/past-research</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Overlap-driven subspace drift paper -->
+  <url>
+    <loc>https://riqe.org/overlap-driven-subspace-drift</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Adjacent-window fluctuations paper -->
+  <url>
+    <loc>https://riqe.org/adjacent-window-fluctuations</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Past Works page -->
+  <url>
+    <loc>https://riqe.org/past-works</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
   <!-- Privacy Policy -->
   <url>
     <loc>https://riqe.org/privpolicy</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-
-  <!-- Under-construction portal (optional – delete this block if you don't want it indexed) -->
-  <url>
-    <loc>https://riqe.org/underconstruction</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
 
 </urlset>
